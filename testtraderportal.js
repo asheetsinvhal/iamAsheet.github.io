@@ -114,9 +114,9 @@
 	    for(i=1; i <= portfolio_data.length; i++) {
 	       main_p.innerHTML += '<div style="display: table-row">' +
 	       '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
-	       portfolio_data[i][1] +
+	       portfolio_data.values[i][1] +
 	       '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
-	       portfolio_data[i][2] +
+	       portfolio_data.values[i][2] +
 	       '</div>' + '</div>';
 	    }
 	    main_p.innerHTML += '</div>';
