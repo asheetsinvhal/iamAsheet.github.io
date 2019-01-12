@@ -158,8 +158,8 @@
 	    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity);
 	    break;
 	} 
+   }
  }
- 
  
  buy_stock = function() {    //buying
 	  showNotif('PLACING BUY ORDER');
