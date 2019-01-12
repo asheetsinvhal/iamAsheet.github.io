@@ -111,12 +111,12 @@
 		   
 	   // portfolio_data = JSON.parse(this.responseText);
 	    main_p.innerHTML += '<div style="display: table">';
-	    for(i=1; i <= portfolio_data.length; i++) {
+	    for(var k=1; k <= portfolio_data.length; k++) {
 	       main_p.innerHTML += '<div style="display: table-row">' +
 	       '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
-	       portfolio_data.values[i][1] +
+	       portfolio_data[k][1] +
 	       '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
-	       portfolio_data.values[i][2] +
+	       portfolio_data[k][2] +
 	       '</div>' + '</div>';
 	    }
 	    main_p.innerHTML += '</div>';
@@ -130,7 +130,7 @@
  function showPort() { document.getElementById('portfolio-popup').style.display = 'block'; }
  function hidePort() { document.getElementById('portfolio-popup').style.display = 'none'; }
  
- function refreshTeamData() {
+ function refreshTeamData() { //write to sheets api
 	  var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	   if (this.readyState == 4 && this.status == 200) {
