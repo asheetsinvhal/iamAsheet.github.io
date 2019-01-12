@@ -154,13 +154,13 @@
 
        // How values should be represented in the output.
        // The default render option is ValueRenderOption.FORMATTED_VALUE.
-       valueRenderOption: 'ValueRenderOption.UNFORMATTED_VALUE',  // TODO: Update placeholder value.
+       valueRenderOption: 'UNFORMATTED_VALUE',  // TODO: Update placeholder value.
 
        // How dates, times, and durations should be represented in the output.
        // This is ignored if value_render_option is
        // FORMATTED_VALUE.
        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-       dateTimeRenderOption: 'DateTimeRenderOption.FORMATTED_VALUE',  // TODO: Update placeholder value.
+       dateTimeRenderOption: 'FORMATTED_VALUE',  // TODO: Update placeholder value.
      };
 
      var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
