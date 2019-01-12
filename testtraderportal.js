@@ -117,8 +117,12 @@
    	 showPort();
  }
  
- function showPort() { document.getElementById('portfolio-popup').style.display = 'block'; }
- function hidePort() { document.getElementById('portfolio-popup').style.display = 'none'; }
+ function showPort() {
+	 document.getElementById('portfolio-popup').style.display = 'block';
+ }
+ function hidePort() { 
+	 document.getElementById('portfolio-popup').style.display = 'none';
+ }
  
  function refreshTeamData() { //write to sheets api
 	  var xhttp = new XMLHttpRequest();
@@ -145,12 +149,12 @@
 	 
 
  function updateMarketPrice() {
-  stockid = document.getElementById('main').value;
+  var stockId = document.getElementById('main').value;
   for(var k=1; k < stocks.length ; k+=1){
-	if( stocks[k][0] == stockid) {
+	if( stocks[k][0] == stockId) {
 	    var price = stocks[k][4];
 	    var quantity = stocks[k][2];
-	    document.getElementById('price').value = Math.round(parseFloat(price)*100)/100;;
+	    document.getElementById('price').value = Math.round(parseFloat(price)*100)/100;
 	    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity);
 	    break;
 	} 
