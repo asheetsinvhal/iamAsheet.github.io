@@ -70,7 +70,7 @@
      request.then(function(response) {
        // TODO: Change code below to process the `response` object:
        console.log(response.result);
-        var all_data = JSON.parse(response.result);
+        var all_data = response.result;
      }, function(reason) {
        console.error('error: ' + reason.result.error.message);
      });
