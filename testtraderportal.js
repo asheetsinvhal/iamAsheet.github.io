@@ -74,8 +74,8 @@
     	   var all_data = response.result;
     		country = all_data.valueRanges[0].values;
     		stocks =  all_data.valueRanges[1].values;
-    		team_portfolio = all_data.valueRanges[2].values;
-    		team_result = all_data.valueRanges[3].values;
+    		portfolio_data = all_data.valueRanges[2].values;
+    		team_data = all_data.valueRanges[3].values;
        }
      }, function(reason) {
        console.error('error: ' + reason.result.error.message);
@@ -109,14 +109,14 @@
 	  xhttp.onreadystatechange = function() {
 	   if (this.readyState == 4 && this.status == 200) {*/
 		   
-	    portfolio_data = JSON.parse(this.responseText);
+	   // portfolio_data = JSON.parse(this.responseText);
 	    main_p.innerHTML += '<div style="display: table">';
-	    for(i in portfolio_data) {
+	    for(i=1; i <= portfolio_data.length; i++) {
 	       main_p.innerHTML += '<div style="display: table-row">' +
 	       '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
-	       portfolio_data[i][0] +
-	       '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
 	       portfolio_data[i][1] +
+	       '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' +
+	       portfolio_data[i][2] +
 	       '</div>' + '</div>';
 	    }
 	    main_p.innerHTML += '</div>';
