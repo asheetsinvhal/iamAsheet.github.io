@@ -86,6 +86,7 @@
     team_id = document.getElementById('team_id').value;
     document.getElementById('team_name').innerHTML = team_data[team_id][1];
     document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][2]*100)/100;
+    hidePort();
  };
  
  putCountryData = function() {
@@ -104,23 +105,20 @@
  
  getPortfolio = function() {
 	 main_p = document.getElementById('main_p');
-	  main_p.innerHTML = '';
-	 /** var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {*/
-		   
-	   // portfolio_data = JSON.parse(this.responseText);
-	    main_p.innerHTML += '<div style="display: table">';
-	    for(var k=1; k <= portfolio_data.length; k += 1) {
-	       main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[1][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[1][2] +'</div>' + '</div>';
-	    }
-	    main_p.innerHTML += '</div>';
-	    showPort();
+	 main_p.innerHTML = '';
+	 main_p.innerHTML += '<div style="display: table">';
+    	 for(var k=1; k <= portfolio_data.length; k += 1) {
+             if(portfolio_data[k][0] == team_id){
+		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '</div>';
+	     }
+   	 }    
+   	 main_p.innerHTML += '</div>';
+   	 showPort();
 	    /** }
 	  };
 	  xhttp.open("GET", "portfolio?c="+country_name+"&t="+team_id, true);
 	  xhttp.send();*/
-	 }
+ }
  
  function showPort() { document.getElementById('portfolio-popup').style.display = 'block'; }
  function hidePort() { document.getElementById('portfolio-popup').style.display = 'none'; }
