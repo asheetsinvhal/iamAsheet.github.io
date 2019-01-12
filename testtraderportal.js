@@ -47,7 +47,34 @@
    function handleSignOutClick(event) {
      gapi.auth2.getAuthInstance().signOut();
    }
-   
+  
+ function makeApiCall() { //Google sheets api
+     var params = {
+       // The ID of the spreadsheet to retrieve data from.
+       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
+       // The A1 notation of the values to retrieve.
+       ranges: ['Stock_Names','Stock_Prices','TeamScores'],  // TODO: Update placeholder value.
+
+       // How values should be represented in the output.
+       // The default render option is ValueRenderOption.FORMATTED_VALUE.
+       valueRenderOption: 'UNFORMATTED_VALUE',  // TODO: Update placeholder value.
+
+       // How dates, times, and durations should be represented in the output.
+       // This is ignored if value_render_option is
+       // FORMATTED_VALUE.
+       // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+       dateTimeRenderOption: 'FORMATTED_STRING',  // TODO: Update placeholder value.
+     };
+
+     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
+     request.then(function(response) {
+       // TODO: Change code below to process the `response` object:
+       console.log(response.result);
+        var all_data = JSON.parse(response.result.valueRanges);
+     }, function(reason) {
+       console.error('error: ' + reason.result.error.message);
+     });
+   }
  function refreshTeamData() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -145,32 +172,7 @@
   xhttp.send();
  }
  
- function makeApiCall() { //Google sheets api
-     var params = {
-       // The ID of the spreadsheet to retrieve data from.
-       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
-       // The A1 notation of the values to retrieve.
-       ranges: ['Stock_Names','Stock_Prices','TeamScores'],  // TODO: Update placeholder value.
 
-       // How values should be represented in the output.
-       // The default render option is ValueRenderOption.FORMATTED_VALUE.
-       valueRenderOption: 'UNFORMATTED_VALUE',  // TODO: Update placeholder value.
-
-       // How dates, times, and durations should be represented in the output.
-       // This is ignored if value_render_option is
-       // FORMATTED_VALUE.
-       // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-       dateTimeRenderOption: 'FORMATTED_STRING',  // TODO: Update placeholder value.
-     };
-
-     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
-     request.then(function(response) {
-       // TODO: Change code below to process the `response` object:
-       console.log(response.result);
-     }, function(reason) {
-       console.error('error: ' + reason.result.error.message);
-     });
-   }
 
    
  putTeamData = function() {
