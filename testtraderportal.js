@@ -7,9 +7,9 @@
  var country_data = {"AUSTRALIA": ["ANZ Group", "BHP Billiton", "K&S Corporation Ltd.", "Karmanta Bank", "Telstra"], "ENGLAND": ["Barclays", "British Airways", "Diageo", "Tesco", "Vodafone"], "USA": ["Apple", "Drone CO", "Google", "Microsoft Corp.", "Petrologistic LP"], "INDIA": ["BHEL", "ICICI Bank", "Idea Celluar", "Reliance Industries Limited", "Sun Pharma"], "CHINA": ["Alibaba", "Jigzena Ltd", "Sany Group", "Soft Bank", "Xiomi"], "GERMANY": ["BMW AG", "Continental", "Deutsche AG", "Siemens AG", "Volkswagen AG"], "JAPAN": ["Aerozone", "Krayota Motor Corp", "Nippon Steel", "Samurai Corp", "Sony"]}
  
  function initClient() {
-     var API_KEY = '';  // TODO: Update placeholder with desired API key.
+     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s';  // TODO: Update placeholder with desired API key.
 
-     var CLIENT_ID = '';  // TODO: Update placeholder with desired client ID.
+     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
 
      // TODO: Authorize using one of the following scopes:
      //   'https://www.googleapis.com/auth/drive'
@@ -160,7 +160,7 @@
        // This is ignored if value_render_option is
        // FORMATTED_VALUE.
        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-       dateTimeRenderOption: '',  // TODO: Update placeholder value.
+       dateTimeRenderOption: 'DateTimeRenderOption.FORMATTED_VALUE',  // TODO: Update placeholder value.
      };
 
      var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
@@ -173,16 +173,17 @@
    }
 
    
-   
- putData = function() {
+ putTeamData = function() {
     team_id = document.getElementById('team_id').value;
     document.getElementById('team_name').innerHTML = team_data[team_id][0];
     document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][1]*100)/100;
     country_name = document.getElementById('country_name').value;
     console.log(country_name);
-    if(country_name != -1) { getPortfolio(); }
+    if(country_name != -1) { 
+    	getPortfolio();
+    }
  };
- putData2 = function() {
+ putCountryData = function() {
     country_name = document.getElementById('country_name').value;
     main_content = document.getElementById('main');
     main_content.innerHTML = '<option>-</option>';
@@ -191,7 +192,9 @@
     }
     team_id = document.getElementById('team_id').value;
     console.log(team_id);
-    if(team_id != -1) { getPortfolio(); }
+    if(team_id != -1) { 
+    	getPortfolio(); 
+    }
  }
  function updateMarketPrice() {
   stock = document.getElementById('main').value;
