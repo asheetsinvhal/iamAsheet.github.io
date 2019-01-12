@@ -150,7 +150,7 @@
        // The ID of the spreadsheet to retrieve data from.
        spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
        // The A1 notation of the values to retrieve.
-       range: 'Stock_Names',  // TODO: Update placeholder value.
+       ranges: ['Stock_Names','Stock_Prices','TeamScores'],  // TODO: Update placeholder value.
 
        // How values should be represented in the output.
        // The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -163,7 +163,7 @@
        dateTimeRenderOption: 'FORMATTED_STRING',  // TODO: Update placeholder value.
      };
 
-     var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
+     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
      request.then(function(response) {
        // TODO: Change code below to process the `response` object:
        console.log(response.result);
