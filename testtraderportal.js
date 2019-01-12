@@ -111,7 +111,6 @@
     	 for(var k=1; k < portfolio_data.length; k += 1) {
              if(portfolio_data[k][0] == team_id){
 		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][4] +'</div>'+'</div>';
-	        break;
 	     }
    	 }    
    	 main_p.innerHTML += '</div>';
