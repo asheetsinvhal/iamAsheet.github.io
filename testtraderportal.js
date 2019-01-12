@@ -107,17 +107,13 @@
 	 main_p = document.getElementById('main_p');
 	 main_p.innerHTML = '';
 	 main_p.innerHTML += '<div style="display: table">';
-    	 for(var k=1; k <= portfolio_data.length; k += 1) {
+    	 for(var k=1; k < portfolio_data.length; k += 1) {
              if(portfolio_data[k][0] == team_id){
 		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '</div>';
 	     }
    	 }    
    	 main_p.innerHTML += '</div>';
    	 showPort();
-	    /** }
-	  };
-	  xhttp.open("GET", "portfolio?c="+country_name+"&t="+team_id, true);
-	  xhttp.send();*/
  }
  
  function showPort() { document.getElementById('portfolio-popup').style.display = 'block'; }
