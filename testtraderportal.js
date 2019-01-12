@@ -92,7 +92,7 @@
     country_name = document.getElementById('country_name').value;
     main_content = document.getElementById('main');
     main_content.innerHTML = '<option>-</option>';
-    for(i in country_data[country_name]) {
+    for(var i in country_data[country_name]) {
            main_content.innerHTML += '<option>' + country_data[country_name][i] + '</option>';
     }
     team_id = document.getElementById('team_id').value;
@@ -111,9 +111,9 @@
 		   
 	   // portfolio_data = JSON.parse(this.responseText);
 	    main_p.innerHTML += '<div style="display: table">';
-	   // for(var k=1; k <= portfolio_data.length; k++) {
+	    for(var k=1; k <= portfolio_data.length; k += 1) {
 	       main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[1][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[1][2] +'</div>' + '</div>';
-	  //  }
+	    }
 	    main_p.innerHTML += '</div>';
 	    showPort();
 	    /** }
