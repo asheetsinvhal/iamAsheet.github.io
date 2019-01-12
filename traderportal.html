@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Globus Feneratus</title>
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900|Open+Sans" rel="stylesheet">
+ <style>
+  body {
+ background: rgba(3, 13, 35, 0.9);
+ color: white;
+ font-family: 'Montserrat';
+ font-weight: 900;
+}
+.big-title {
+ font-size: 30px;
+ padding: 20px;
+}
+#container {
+ width: 300px;
+ margin: 0px auto;
+}
+#container * {
+ width:100%;
+}
+.less-margin {
+ margin-bottom: 4px;
+}
+select {
+ font-family: inherit;
+ font-weight: 900;
+ background: inherit;
+ border: none;
+ border-bottom: 1px solid white;
+ color: white;
+ font-size: 28px;
+ outline: none;
+ margin-bottom: 12px;
+}
+option {
+ font-family: inherit;
+ font-weight: 900;
+ background: inherit;
+ color: black;
+}
+input {
+ font-family: inherit;
+ font-weight: 900;
+ background: inherit;
+ border: none;
+ border-bottom: 1px solid white;
+ color: white;
+ font-size: 28px;
+ outline: none;
+ margin-bottom: 12px;
+}
+button {
+ font-family: inherit;
+ font-weight: 900;
+ margin-top: 20px;
+ width: auto;
+}
+ p {
+  margin: 0px;
+  padding: 0px;
+ }
+ div {
+  margin: 0px;
+  padding: 0px;
+ }
+ #portfolio-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  color: black;
+  padding: 30px;
+  display: none;
+  min-height: 260px;
+ }
+ #main_p {
+  margin-top: 30px;
+ }
+ #portfolio-popup span {
+  color: red;
+ }
+ #notif {
+ width: 400px;
+ padding: 20px 10px;
+ background: rgba(256,256,256,1);
+ color: black;
+ position: fixed;
+ bottom: 30px;
+ right: 30px;
+ display: none;
+}
+ </style>
+ <script type="text/javascript" src="testtraderportal.js">
+ </script>
+</head>
+<body>
+	<p class="big-title">TRADER'S PORTAL</p>
+	<div id="container">
+		<p class="less-margin">TEAM ID</p>
+		<div>
+			<select id="team_id" onchange="putTeamData();">
+				<option value=-1>-</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+				<option>9</option>
+				<option>10</option>
+				<option>11</option>
+				<option>12</option>
+				<option>13</option>
+				<option>14</option>
+				<option>15</option>
+				<option>16</option>
+			</select>
+		</div>
+		<p class="less-margin">COUNTRY NAME</p>
+		<div>
+			<select id='country_name' onchange="putCountryData();">
+				<option value=-1>-</option>
+				<option>AUSTRALIA</option>
+				<option>CHINA</option>
+				<option>ENGLAND</option>
+				<option>GERMANY</option>
+				<option>INDIA</option>
+				<option>JAPAN</option>
+				<option>USA</option>
+			</select>
+		</div>
+		<p class="less-margin">STOCK</p>
+		<div>
+			<select id="main" onchange="updateMarketPrice();">
+			</select>
+		</div>
+		<p class="less-margin">QUANTITY</p>
+		<div><input type="text" id="quantity"></div>
+		<p class="less-margin">PRICE</p>
+		<div><input type="text" id="price"></div>
+		<div style="display: table;">
+			<div style="display: table-row">
+			<button style="display: table-cell;width: 50%;padding: 6px;" onclick="buy_stock();">BUY</button>
+			<button style="display: table-cell;width: 50%;padding: 6px;" onclick="sell_stock();">SELL</button>
+			</div>
+		</div>
+	</div>
+	<div id="portfolio-popup">
+		<div>TEAM NAME <span id='team_name'></span></div>
+		<div>TEAM BALANCE <span id='team_balance'></span></div>
+		<p id="main_p">
+		</p>
+	</div>
+	<div id="notif">
+		Hello World!!!
+	</div>
+</body>
+</html>
