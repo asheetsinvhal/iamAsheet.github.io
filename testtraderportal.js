@@ -161,16 +161,16 @@ function updateMarketPrice() { //Google sheets api
        //console.log(response.result);
        var stockId = document.getElementById('main').value; 
        if(response.status == 200 && response.result.valueRanges[0] != null){
-    	   shares = response.result.valueRanges[0].values;
+    	   shares = response.result.valueRanges[0].values;             // refreshed values of stocks
 	   for(var k=1; k < shares.length ; k+=1){
 		if( shares[k][0] == stockId) {
-		    var price = stocks[k][4];
-		    var quantity = stocks[k][2];
-		    document.getElementById('price').value = price?Math.round(parseFloat(price)*100)/100:0;
-		    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity?quantity:0);
+		    var stk_price = shares[k][4];
+		    var stk_qty = shares[k][2];
 		    break;
 		} 
-   	  }    
+   	   } 
+	   document.getElementById('price').value = stk_price?Math.round(parseFloat(stk_price)*100)/100:0;
+           document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+stk_qty?stk_qty:0);    
        }
      }, function(reason) {
        console.error('error: ' + reason.result.error.message);
