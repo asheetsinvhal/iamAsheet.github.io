@@ -136,7 +136,8 @@
 }
 
  function updateMarketPrice() {
-  var stockId = document.getElementById('main').value;
+  shares = [];
+  var stockId = document.getElementById('main').value; 
   getStockDataApi();	 
   for(var k=1; k < shares.length ; k+=1){
 	if( shares[k][0] == stockId) {
