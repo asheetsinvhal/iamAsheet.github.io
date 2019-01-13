@@ -136,21 +136,11 @@
 }
 
  function updateMarketPrice() {
-  shares = [];
-  var stockId = document.getElementById('main').value; 
-  getStockDataApi();	 
-  for(var k=1; k < shares.length ; k+=1){
-	if( shares[k][0] == stockId) {
-	    var price = stocks[k][4];
-	    var quantity = stocks[k][2];
-	    document.getElementById('price').value = Math.round(parseFloat(price)*100)/100;
-	    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity);
-	    break;
-	} 
-   }
+  getStockDataApi();	
  }
 
 function getStockDataApi() { //Google sheets api
+     shares = [];	
      var params = {
        // The ID of the spreadsheet to retrieve data from.
        spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
@@ -171,9 +161,19 @@ function getStockDataApi() { //Google sheets api
      var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
      request.then(function(response) {
        // TODO: Change code below to process the `response` object:
-       console.log(response.result);
+       //console.log(response.result);
+       var stockId = document.getElementById('main').value; 
        if(response.status == 200 && response.result.valueRanges[0] != null){
     	   shares = response.result.valueRanges[0].values;
+	   for(var k=1; k < shares.length ; k+=1){
+		if( shares[k][0] == stockId) {
+		    var price = stocks[k][4];
+		    var quantity = stocks[k][2];
+		    document.getElementById('price').value = Math.round(parseFloat(price)*100)/100;
+		    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity);
+		    break;
+		} 
+   	  }    
        }
      }, function(reason) {
        console.error('error: ' + reason.result.error.message);
