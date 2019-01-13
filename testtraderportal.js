@@ -157,15 +157,15 @@ function updateMarketPrice() { //Google sheets api
 
      var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
      request.then(function(response) {
-       // TODO: Change code below to process the `response` object:
-       //console.log(response.result);
+       var stk_price = 0;
+       var stk_qty = 0;
        var stockId = document.getElementById('main').value; 
        if(response.status == 200 && response.result.valueRanges[0] != null){
     	   shares = response.result.valueRanges[0].values;             // refreshed values of stocks
 	   for(var k=1; k < shares.length ; k+=1){
 		if( shares[k][0] == stockId) {
-		    var stk_price = shares[k][4];
-		    var stk_qty = shares[k][2];
+		    stk_price = shares[k][4];
+		    stk_qty = shares[k][2];
 		    break;
 		} 
    	   } 
