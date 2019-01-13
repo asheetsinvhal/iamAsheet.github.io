@@ -134,22 +134,10 @@
 	  xhttp.open("GET", "/teamdata", true);
 	  xhttp.send();
 }
- 
- function showNotif(text, background="white",color="black") {
-	  if(document.getElementById('notif').style.display == 'block') {
-	    setTimeout(function(){showNotif(text, background)},2000);
-	  } else {
-	   document.getElementById('notif').innerHTML = text.toUpperCase();
-	   document.getElementById('notif').style.background = background;
-	   document.getElementById('notif').style.display = 'block';
-	   document.getElementById('notif').style.color = color;
-	   setTimeout(function(){document.getElementById('notif').style.display = 'none'},2000);
-	  }
- }
-	 
 
  function updateMarketPrice() {
   var stockId = document.getElementById('main').value;
+  getStockDataApi()	 
   for(var k=1; k < stocks.length ; k+=1){
 	if( stocks[k][0] == stockId) {
 	    var price = stocks[k][4];
@@ -160,6 +148,40 @@
 	} 
    }
  }
+
+function getStockDataApi() { //Google sheets api
+     var params = {
+       // The ID of the spreadsheet to retrieve data from.
+       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
+       // The A1 notation of the values to retrieve.
+       ranges: 'Stock_Prices',  // TODO: Update placeholder value.
+
+       // How values should be represented in the output.
+       // The default render option is ValueRenderOption.FORMATTED_VALUE.
+       valueRenderOption: 'UNFORMATTED_VALUE',  // TODO: Update placeholder value.
+
+       // How dates, times, and durations should be represented in the output.
+       // This is ignored if value_render_option is
+       // FORMATTED_VALUE.
+       // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+       dateTimeRenderOption: 'FORMATTED_STRING',  // TODO: Update placeholder value.
+     };
+
+     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
+     request.then(function(response) {
+       // TODO: Change code below to process the `response` object:
+       console.log(response.result);
+       if(response.status == 200){
+    	   var all_data = response.result;
+    	   stocks =  all_data.valueRanges[1].values;
+       }
+     }, function(reason) {
+       console.error('error: ' + reason.result.error.message);
+     });
+   } 
+	 
+
+
  
  buy_stock = function() {    //buying
 	  showNotif('PLACING BUY ORDER');
@@ -215,3 +237,15 @@
 	  xhttp.open("GET", "sell?stock="+encodeURIComponent(stock)+"&quantity="+quantity+"&price="+price+"&team_id="+team_id+"&country="+country, true);
 	  xhttp.send();
 }
+
+ function showNotif(text, background="white",color="black") {
+	  if(document.getElementById('notif').style.display == 'block') {
+	    setTimeout(function(){showNotif(text, background)},2000);
+	  } else {
+	   document.getElementById('notif').innerHTML = text.toUpperCase();
+	   document.getElementById('notif').style.background = background;
+	   document.getElementById('notif').style.display = 'block';
+	   document.getElementById('notif').style.color = color;
+	   setTimeout(function(){document.getElementById('notif').style.display = 'none'},2000);
+	  }
+ }
