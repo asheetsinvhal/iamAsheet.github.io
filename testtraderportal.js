@@ -137,9 +137,9 @@
 
  function updateMarketPrice() {
   var stockId = document.getElementById('main').value;
-  getStockDataApi()	 
-  for(var k=1; k < stocks.length ; k+=1){
-	if( stocks[k][0] == stockId) {
+  getStockDataApi();	 
+  for(var k=1; k < shares.length ; k+=1){
+	if( shares[k][0] == stockId) {
 	    var price = stocks[k][4];
 	    var quantity = stocks[k][2];
 	    document.getElementById('price').value = Math.round(parseFloat(price)*100)/100;
@@ -171,9 +171,8 @@ function getStockDataApi() { //Google sheets api
      request.then(function(response) {
        // TODO: Change code below to process the `response` object:
        console.log(response.result);
-       if(response.status == 200){
-    	   var all_data = response.result;
-    	   stocks =  all_data.valueRanges[1].values;
+       if(response.status == 200 && response.result.valueRanges[0] != null){
+    	   shares = response.result.valueRanges[0].values;
        }
      }, function(reason) {
        console.error('error: ' + reason.result.error.message);
@@ -181,8 +180,6 @@ function getStockDataApi() { //Google sheets api
    } 
 	 
 
-
- 
  buy_stock = function() {    //buying
 	  showNotif('PLACING BUY ORDER');
 	  stock = document.getElementById('main').value;
