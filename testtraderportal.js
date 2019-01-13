@@ -135,11 +135,8 @@
 	  xhttp.send();
 }
 
- function updateMarketPrice() {
-  getStockDataApi();	
- }
 
-function getStockDataApi() { //Google sheets api
+function updateMarketPrice() { //Google sheets api
      shares = [];	
      var params = {
        // The ID of the spreadsheet to retrieve data from.
@@ -169,8 +166,8 @@ function getStockDataApi() { //Google sheets api
 		if( shares[k][0] == stockId) {
 		    var price = stocks[k][4];
 		    var quantity = stocks[k][2];
-		    document.getElementById('price').value = Math.round(parseFloat(price)*100)/100;
-		    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity);
+		    document.getElementById('price').value = price?Math.round(parseFloat(price)*100)/100:0;
+		    document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+quantity?quantity:0);
 		    break;
 		} 
    	  }    
