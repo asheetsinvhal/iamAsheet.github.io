@@ -158,19 +158,19 @@ function updateMarketPrice() { //Google sheets api
      var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
      request.then(function(response) {
        var stk_price = 0;
-       var stk_qty = 0;
+       var max_stk_qty = 0;
        var stockId = document.getElementById('main').value; 
        if(response.status == 200 && response.result.valueRanges[0] != null){
     	   shares = response.result.valueRanges[0].values;             // refreshed values of stocks
 	   for(var k=1; k < shares.length ; k+=1){
 		if( shares[k][0] == stockId) {
 		    stk_price = shares[k][4];
-		    stk_qty = shares[k][2];
+		    max_stk_qty = shares[k][2];
 		    break;
 		} 
    	   } 
 	   document.getElementById('price').value = stk_price?Math.round(parseFloat(stk_price)*100)/100:0;
-           document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+stk_qty?stk_qty:0);    
+           document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+max_stk_qty?max_stk_qty:0);    
        }
      }, function(reason) {
        console.error('error: ' + reason.result.error.message);
@@ -180,30 +180,54 @@ function updateMarketPrice() { //Google sheets api
 
  buy_stock = function() {    //buying
 	  showNotif('PLACING BUY ORDER');
-	  stock = document.getElementById('main').value;
-	  quantity = document.getElementById('quantity').value;
-	  price = document.getElementById('price').value;
+	  var stock = document.getElementById('main').value; //main-> stock name
+	  var qty = document.getElementById('quantity').value;
+	  var price = document.getElementById('price').value;
 	  team_id = document.getElementById('team_id').value;
-	  country = document.getElementById('country_name').value;
+	  var country = document.getElementById('country_name').value;
 	  document.getElementById('main').value = -1;
-	  document.getElementById('price').value = '';
 	  document.getElementById('quantity').setAttribute('placeholder','');
 	  document.getElementById('quantity').value = '';
 	  document.getElementById('country_name').value = '';
 	  document.getElementById('team_id').value = '';
-	  var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	    getPortfolio();
-	    response = this.responseText;
-	    if(!response.includes('ERROR')) { document.getElementById('team_balance').innerHTML  = Math.round(parseFloat(response)*100)/100; showNotif('BUY ORDER SUCCESFUL');}
-	    else { showNotif(response, "#ff0035", "white"); }
-	    setTimeout(function() {document.getElementById('team_name').innerHTML = '';document.getElementById('team_balance').innerHTML = '';hidePort()}, 5000);
-	    refreshTeamData();
-	   }
-	  };
-	  xhttp.open("GET", "buy?stock="+encodeURIComponent(stock)+"&quantity="+quantity+"&price="+price+"&team_id="+team_id+"&country="+country, true);
-	  xhttp.send();
+	  document.getElementById('price').value = '';
+	  var start_cell= G2;
+	  var params = {
+	       // The ID of the spreadsheet to retrieve data from.
+	       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
+	       // The A1 notation of the values to retrieve.
+	       range: country+'!'+start_cell,  // TODO: Update placeholder value.
+	       // How the input data should be interpreted.
+               valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
+      	   };
+	   var valueRangeBody = {
+        	// TODO: Add desired properties to the request body. All existing properties
+       		 // will be replaced.
+		 "values": [
+			    [
+			      qty,price,0,0
+			    ]
+		  ] 
+      	   };
+		// ADD QTY AND PRICE VALIDATIONS HERE
+      var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+      request.then(function(response) {
+	 if(response.status == 200){
+	    getPortfolio(); 
+            document.getElementById('team_balance').innerHTML  = Math.round(parseFloat(response)*100)/100;
+	    showNotif('BUY ORDER SUCCESFUL');
+	 }
+	 else{ 
+	     showNotif('! TRY AGAIN !', "#ff0035", "white");
+	 }
+	 setTimeout(function() {
+		     document.getElementById('team_name').innerHTML = '';
+		     document.getElementById('team_balance').innerHTML = '';
+		     hidePort()}, 2000);
+	 //refreshTeamData();
+         },function(reason) {
+       		console.error('error: ' + reason.result.error.message);
+	 });
  }
  sell_stock = function() { //selling
 	  showNotif('PLACING SELL ORDER');
@@ -226,7 +250,7 @@ function updateMarketPrice() { //Google sheets api
 	    if(!response.includes('ERROR')) { document.getElementById('team_balance').innerHTML  = Math.round(parseFloat(response)*100)/100;showNotif('SELL ORDER SUCCESFUL'); }
 	    else { showNotif(response, "#ff0035", "white"); }
 	    setTimeout(function() {document.getElementById('team_name').innerHTML = '';document.getElementById('team_balance').innerHTML = '';hidePort()} , 5000);
-	    refreshTeamData();
+	   // refreshTeamData();
 	   }
 	  };
 	  xhttp.open("GET", "sell?stock="+encodeURIComponent(stock)+"&quantity="+quantity+"&price="+price+"&team_id="+team_id+"&country="+country, true);
@@ -241,6 +265,6 @@ function updateMarketPrice() { //Google sheets api
 	   document.getElementById('notif').style.background = background;
 	   document.getElementById('notif').style.display = 'block';
 	   document.getElementById('notif').style.color = color;
-	   setTimeout(function(){document.getElementById('notif').style.display = 'none'},2000);
+	   setTimeout(function(){document.getElementById('notif').style.display = 'none'},2100);
 	  }
  }
