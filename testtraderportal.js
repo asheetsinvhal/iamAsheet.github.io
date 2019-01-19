@@ -164,8 +164,8 @@ function updateMarketPrice() { //Google sheets api
     	   shares = response.result.valueRanges[0].values;             // refreshed values of stocks
 	   for(var k=1; k < shares.length ; k+=1){
 		if( shares[k][0] == stockId) {
-		    stk_price = shares[k][4];
-		    max_stk_qty = shares[k][2];
+		    stk_price = shares[k][5];
+		    max_stk_qty = shares[k][4];
 		    break;
 		} 
    	   } 
@@ -191,7 +191,7 @@ function updateMarketPrice() { //Google sheets api
 	  document.getElementById('country_name').value = '';
 	  document.getElementById('team_id').value = '';
 	  document.getElementById('price').value = '';
-	  var start_cell= G2;
+	  var start_cell= 'G2';
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
