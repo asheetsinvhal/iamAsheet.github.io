@@ -53,13 +53,10 @@
 			<select id="main" onchange="updateMarketPrice();">
 			</select>
 		</div>
-		<form onchange="total.value = parseInt(quantity.value)*parseFloat(price.value)">
-			<p class="less-margin">QUANTITY</p>
-			<div><input type="number" id="quantity"></div>
-			<p class="less-margin">PRICE</p>
-			<div><input type="number" pattern='[0-9]{10}' id="price"></div>
-			<p class="less-margin"> TOTAL : <output type="number" id="total" name="total" for="quantity price"></output></p>
-		</form>
+		<p class="less-margin">QUANTITY</p>
+		<div><input type="text" id="quantity"></div>
+		<p class="less-margin">PRICE</p>
+		<div><input type="number" pattern='[0-9]{10}' id="price"></div>
 		<div style="display: table;">
 			<div style="display: table-row">
 			&nbsp;&nbsp;
