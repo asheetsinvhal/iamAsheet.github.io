@@ -110,7 +110,8 @@
 	 main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;"> Qty </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;"> Value </div></div> '
     	 for(var k=1; k < portfolio_data.length; k += 1) {
              if(portfolio_data[k][0] == team_id){
-		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][4] +'</div>'+'</div>';
+		var final_value = Math.round(parseFloat(portfolio_data[k][4])*100)/100 ; 
+		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + final_value +'</div>'+'</div>';
 	     }
    	 }    
    	 main_p.innerHTML += '</div>';
@@ -177,7 +178,7 @@ function updateMarketPrice() { //Google sheets api
      });
    } 
 
- stock_action = function(buttonId) {    //buying
+ stock_action = function(buttonId) {   
 	  showNotif('PLACING ' + buttonId.toUpperCase() + ' ORDER');
 	  var team_id = document.getElementById('team_id').value;
 	  var country = document.getElementById('country_name').value;
@@ -191,29 +192,30 @@ function updateMarketPrice() { //Google sheets api
 	  document.getElementById('country_name').value = '';
 	  document.getElementById('team_id').value = '';
 	  document.getElementById('price').value = '';
-	  var start_cell= 'G2';
+	  var start_cell= 'G';
+	  var start_cell_ind = 2;
 	  switch(stockId) {
 		  case "BHEL"|"ALI":
-		    start_cell= 'G2';
+		    start_cell_ind= 2;
 		    break;
 		  case "ICIC":
-		    start_cell= 'G82';
+		    start_cell_ind= 82;
 		    break;
 		  case "IDEA":
-		    start_cell= 'G162';
+		    start_cell_ind= 162;
 		    break;
 		  case "RIL"|"ALI":
-		    start_cell= 'G242';
+		    start_cell_ind= 242;
 		    break;	
-		  case "SUN"|"ALI":
-		    start_cell= 'G322';
+		  case "SUN"|"JIN":
+		    start_cell_ind= 322;
 		    break;
 		  default:
-		    start_cell= 'G2';
+		    start_cell_ind= 2;
 	  }
-	  if(start_cell != null){
-		  
-	  	start_cell += 1;
+	  if(start_cell != null){ //fetch value of start cell and check
+	  	start_cell_ind += 1;
+		start_cell = start_cell + toString(start_cell_ind);
 	  }
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
@@ -225,8 +227,6 @@ function updateMarketPrice() { //Google sheets api
       	   };
 	   if(buttonId == "buy" ){
 		   var valueRangeBody = {
-			// TODO: Add desired properties to the request body. All existing properties
-			 // will be replaced.
 			 "values": [
 				    [
 				      qty,price,0,0,null,team_id
@@ -235,8 +235,6 @@ function updateMarketPrice() { //Google sheets api
 		   };
 	   }else{
 	   	    var valueRangeBody = {
-			// TODO: Add desired properties to the request body. All existing properties
-			 // will be replaced.
 			 "values": [
 				    [
 				      0,0,qty,price,null,team_id
@@ -250,7 +248,7 @@ function updateMarketPrice() { //Google sheets api
 	 if(response.status == 200){
 	    getPortfolio(); 
 		 //show updated porfolio
-	    showNotif('ORDER SUCCESFUL');
+	    showNotif(buttonId.toUpperCase() + 'ORDER SUCCESFUL');
 	 }
 	 else{ 
 	     showNotif('! TRY AGAIN !', "#ff0035", "white");
