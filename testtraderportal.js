@@ -178,7 +178,7 @@ function updateMarketPrice() { //Google sheets api
    } 
 
  stock_action = function(buttonId) {    //buying
-	  showNotif('PLACING BUY ORDER');
+	  showNotif('PLACING ' + buttonId.toUpperCase() + ' ORDER');
 	  var team_id = document.getElementById('team_id').value;
 	  var country = document.getElementById('country_name').value;
 	  var stockId = document.getElementById('main').value; //main-> stock ID
@@ -210,6 +210,10 @@ function updateMarketPrice() { //Google sheets api
 		    break;
 		  default:
 		    start_cell= 'G2';
+	  }
+	  if(start_cell != null){
+		  
+	  	start_cell += 1;
 	  }
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
