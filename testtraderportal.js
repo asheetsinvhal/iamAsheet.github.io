@@ -53,7 +53,7 @@
        // The ID of the spreadsheet to retrieve data from.
        spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
        // The A1 notation of the values to retrieve.
-       ranges: ['Stock_Names','Stock_Prices','Portfolios','TeamScores'],  // TODO: Update placeholder value.
+       ranges: ['Stock_Names','Stock_Prices','PortfolioR1','TeamScores'],  // TODO: Update placeholder value.
 
        // How values should be represented in the output.
        // The default render option is ValueRenderOption.FORMATTED_VALUE.
