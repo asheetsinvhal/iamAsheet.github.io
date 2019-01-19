@@ -97,7 +97,7 @@
            main_content.innerHTML += '<option>' + country_data[country_name][i] + '</option>';
     }
     team_id = document.getElementById('team_id').value;
-    console.log(team_id);
+    //console.log(team_id);
     if(team_id != -1 && country_name != -1) { 
     	getPortfolio(); 
     }
@@ -246,9 +246,9 @@ function updateMarketPrice() { //Google sheets api
         var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
         request.then(function(response) {
 	 if(response.status == 200){
+ 	    showNotif(buttonId.toUpperCase() + 'ORDER SUCCESFUL');
+	    makeApiCall();
 	    getPortfolio(); 
-		 //show updated porfolio
-	    showNotif(buttonId.toUpperCase() + 'ORDER SUCCESFUL');
 	 }
 	 else{ 
 	     showNotif('! TRY AGAIN !', "#ff0035", "white");
