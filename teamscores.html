@@ -1,0 +1,56 @@
+
+<html>
+<head>
+<title>Globus Feneratus</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:900|Open+Sans" rel="stylesheet">
+<link rel="stylesheet" href="css/teamscores.css">
+
+<script>
+function showNotif(text) {
+ if(document.getElementById('notif').style.display == 'block') {
+  setTimeout(function(){showNotif(text)},2000);
+ } else {
+  document.getElementById('notif').innerHTML = text.toUpperCase();
+  document.getElementById('notif').style.display = 'block';
+  setTimeout(function(){document.getElementById('notif').style.display = 'none'},2000);
+ }
+}
+function login() {
+ if(document.getElementById('username-field').value != 'bbguy' || document.getElementById('password-field').value != 'finman') {
+  showNotif("INVALID USER CREDENTIALS");
+ }
+ else {
+  document.getElementById('passlap').style.display = 'none';
+ }
+}
+</script>
+
+</head>
+<body>
+
+	<div id="main-body">
+	<p class="big-title">TEAM SCORES</p>
+		<div style='display:table'>
+		
+		</div>
+	</div>
+	<div id="passlap">
+		<div id="container">
+			<!--  <p class="less-margin">USERNAME</p>
+			<div>
+				<input type="text" id="username-field">
+			</div>
+			<p class="less-margin">PASSWORD</p>
+			<div>
+				<input type="password" id="password-field">
+			</div>
+			<div style="text-align: center;margin-top: 30px;">
+				<button onclick="login();" style="width: auto;">SUBMIT</button>
+			</div>-->
+		</div>
+	</div>
+	<div id="notif">
+		Hello World!!!
+	</div>
+</body>
+</html>
