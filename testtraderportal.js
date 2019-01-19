@@ -176,15 +176,15 @@ function updateMarketPrice() { //Google sheets api
        console.error('error: ' + reason.result.error.message);
      });
    } 
-	 
 
- buy_stock = function() {    //buying
+ stock_action = function(buttonId) {    //buying
 	  showNotif('PLACING BUY ORDER');
-	  var stock = document.getElementById('main').value; //main-> stock name
+	  var team_id = document.getElementById('team_id').value;
+	  var country = document.getElementById('country_name').value;
+	  var stockId = document.getElementById('main').value; //main-> stock ID
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value;
-	  team_id = document.getElementById('team_id').value;
-	  var country = document.getElementById('country_name').value;
+	  var total_value = Math.round(parseFloat(qty * price)*100)/100  
 	  document.getElementById('main').value = -1;
 	  document.getElementById('quantity').setAttribute('placeholder','');
 	  document.getElementById('quantity').value = '';
@@ -192,6 +192,25 @@ function updateMarketPrice() { //Google sheets api
 	  document.getElementById('team_id').value = '';
 	  document.getElementById('price').value = '';
 	  var start_cell= 'G2';
+	  switch(stockId) {
+		  case "BHEL"|"ALI":
+		    start_cell= 'G2';
+		    break;
+		  case "ICIC":
+		    start_cell= 'G82';
+		    break;
+		  case "IDEA":
+		    start_cell= 'G162';
+		    break;
+		  case "RIL"|"ALI":
+		    start_cell= 'G242';
+		    break;	
+		  case "SUN"|"ALI":
+		    start_cell= 'G322';
+		    break;
+		  default:
+		    start_cell= 'G2';
+	  }
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
@@ -200,22 +219,34 @@ function updateMarketPrice() { //Google sheets api
 	       // How the input data should be interpreted.
                valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       	   };
-	   var valueRangeBody = {
-        	// TODO: Add desired properties to the request body. All existing properties
-       		 // will be replaced.
-		 "values": [
-			    [
-			      qty,price,0,0
-			    ]
-		  ] 
-      	   };
-		// ADD QTY AND PRICE VALIDATIONS HERE
-      var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
-      request.then(function(response) {
+	   if(buttonId == "buy" ){
+		   var valueRangeBody = {
+			// TODO: Add desired properties to the request body. All existing properties
+			 // will be replaced.
+			 "values": [
+				    [
+				      qty,price,0,0,null,team_id
+				    ]
+			  ] 
+		   };
+	   }else{
+	   	    var valueRangeBody = {
+			// TODO: Add desired properties to the request body. All existing properties
+			 // will be replaced.
+			 "values": [
+				    [
+				      0,0,qty,price,null,team_id
+				    ]
+			  ] 
+		   };
+	   }
+		//if()else{}  ADD QTY AND PRICE VALIDATIONS HERE
+        var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+        request.then(function(response) {
 	 if(response.status == 200){
 	    getPortfolio(); 
-            document.getElementById('team_balance').innerHTML  = Math.round(parseFloat(response)*100)/100;
-	    showNotif('BUY ORDER SUCCESFUL');
+		 //show updated porfolio
+	    showNotif('ORDER SUCCESFUL');
 	 }
 	 else{ 
 	     showNotif('! TRY AGAIN !', "#ff0035", "white");
@@ -229,6 +260,7 @@ function updateMarketPrice() { //Google sheets api
        		console.error('error: ' + reason.result.error.message);
 	 });
  }
+/*
  sell_stock = function() { //selling
 	  showNotif('PLACING SELL ORDER');
 	  stock = document.getElementById('main').value;
@@ -256,7 +288,7 @@ function updateMarketPrice() { //Google sheets api
 	  xhttp.open("GET", "sell?stock="+encodeURIComponent(stock)+"&quantity="+quantity+"&price="+price+"&team_id="+team_id+"&country="+country, true);
 	  xhttp.send();
 }
-
+*/
  function showNotif(text, background="white",color="black") {
 	  if(document.getElementById('notif').style.display == 'block') {
 	    setTimeout(function(){showNotif(text, background)},2000);
