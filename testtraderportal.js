@@ -186,13 +186,8 @@ function updateMarketPrice() { //Google sheets api
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value;
 	  var total_value = Math.round(parseFloat(qty * price)*100)/100  
-	  document.getElementById('main').value = -1;
-	  document.getElementById('quantity').setAttribute('placeholder','');
-	  document.getElementById('quantity').value = '';
-	  document.getElementById('country_name').value = '';
-	  document.getElementById('team_id').value = '';
-	  document.getElementById('price').value = '';
-	  var start_cell= 'G';
+	  
+	  var start_cell= "G";
 	  var start_cell_ind = 2;
 	  switch(stockId) {
 		  case "BHEL"|"ALI":
@@ -245,19 +240,25 @@ function updateMarketPrice() { //Google sheets api
 		//if()else{}  ADD QTY AND PRICE VALIDATIONS HERE
         var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
         request.then(function(response) {
+	  document.getElementById('main').value = -1;
+	  document.getElementById('quantity').setAttribute('placeholder','');
+	  document.getElementById('quantity').value = '';
+	  document.getElementById('country_name').value = '';
+	  document.getElementById('team_id').value = '';
+	  document.getElementById('price').value = '';
 	 if(response.status == 200){
- 	    showNotif(buttonId.toUpperCase() + 'ORDER SUCCESFUL');
+ 	    showNotif(buttonId.toUpperCase() + ' ORDER SUCCESFUL');
 	    makeApiCall();
-	    getPortfolio(); 
+	    setTimeout( getPortfolio, 2000);
+	    showPort();
 	 }
 	 else{ 
 	     showNotif('! TRY AGAIN !', "#ff0035", "white");
+	     //setTimeout(function() {
+		    // document.getElementById('team_name').innerHTML = '';
+		    // document.getElementById('team_balance').innerHTML = '';
+		   //  hidePort()}, 2000);
 	 }
-	 setTimeout(function() {
-		     document.getElementById('team_name').innerHTML = '';
-		     document.getElementById('team_balance').innerHTML = '';
-		     hidePort()}, 2000);
-	 //refreshTeamData();
          },function(reason) {
        		console.error('error: ' + reason.result.error.message);
 	 });
