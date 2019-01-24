@@ -191,7 +191,7 @@ function updateMarketPrice() { //Google sheets api
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
 	       // The A1 notation of the values to retrieve.
-	       range: 'TestUIn',  // TODO: Update placeholder value.
+	       range: 'TestUIn!A2',  // TODO: Update placeholder value.
 	       // How the input data should be interpreted.
                valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       	   };
