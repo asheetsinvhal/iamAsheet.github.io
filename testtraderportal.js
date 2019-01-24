@@ -8,6 +8,7 @@
  
  var country;
  var stocks;
+ var portfolio_data;
  var team_data;
  function initClient() {
      var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s';  // TODO: Update placeholder with desired API key.
@@ -85,7 +86,7 @@
    } 
   
  putTeamData = function() {
-    team_id = document.getElementById('team_id').value;
+   // team_id = document.getElementById('team_id').value;
     document.getElementById('team_name').innerHTML = team_data[team_id][1];
     document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][2]*100)/100;
     hidePort();
@@ -99,7 +100,6 @@
            main_content.innerHTML += '<option>' + country_data[country_name][i] + '</option>';
     }
     team_id = document.getElementById('team_id').value;
-    //console.log(team_id);
     if(team_id != -1 && country_name != -1) { 
     	getPortfolio(); 
     }
@@ -109,15 +109,15 @@
 	 main_p = document.getElementById('main_p');
 	 main_p.innerHTML = '';
 	 main_p.innerHTML += '<div style="display: table">';
-	 main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;"> Qty </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;"> Value </div></div> '
-    	 for(var k=1; k < portfolio_data.length; k += 1) {
-             if(portfolio_data[k][0] == team_id){
-		var final_value = Math.round(parseFloat(portfolio_data[k][4])*100)/100 ; 
-		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + final_value +'</div>'+'</div>';
+	 main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;"> VALUE </div></div> '
+	 for(var k=1; k < portfolio_data.length; k += 1) {
+	     if(portfolio_data[k][0] == team_id){
+		var current_value = Math.round(parseFloat(portfolio_data[k][4])*100)/100 ; 
+		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value +'</div>'+'</div>';
 	     }
-   	 }    
-   	 main_p.innerHTML += '</div>';
-   	 showPort();
+	 }    
+	 main_p.innerHTML += '</div>';
+	 showPort();
  }
  
  function showPort() {
