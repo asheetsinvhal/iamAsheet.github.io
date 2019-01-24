@@ -85,15 +85,16 @@
      });
    } 
   
- putTeamData = function() {
-   // team_id = document.getElementById('team_id').value;
-    document.getElementById('team_name').innerHTML = team_data[team_id][1];
-    document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][2]*100)/100;
+ putTeamData = function() { //ELIMINATE
     hidePort();
  };
  
- putCountryData = function() {
+ putCountryData = function() {  //change to putTeamData
+    team_id = document.getElementById('team_id').value;
     country_name = document.getElementById('country_name').value;
+    document.getElementById('team_name').innerHTML = team_data[team_id][1];
+    document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][2]*100)/100;	 
+    
     main_content = document.getElementById('main');
     main_content.innerHTML = '<option>-</option>';
     for(var i in country_data[country_name]) {
