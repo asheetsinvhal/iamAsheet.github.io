@@ -165,12 +165,12 @@ function updateMarketPrice() { //Google sheets api
     	   shares = response.result.valueRanges[0].values;             // refreshed values of stocks
 	   for(var k=1; k < shares.length ; k+=1){
 		if( shares[k][0] == stockId) {
-		    stk_price = shares[k][5];
-		    max_stk_qty = shares[k][4];
+		    max_stk_qty = shares[k][5];
+		    stk_price = shares[k][6];
 		    break;
 		} 
    	   } 
-	   document.getElementById('price').value = stk_price?Math.round(parseFloat(stk_price)*100)/100:0;
+	   document.getElementById('price').value = stk_price ? Math.round(parseFloat(stk_price)*100)/100:0;
            document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+max_stk_qty?max_stk_qty:0);    
        }
      }, function(reason) {
@@ -179,44 +179,19 @@ function updateMarketPrice() { //Google sheets api
    } 
 
  stock_action = function(buttonId) {   
-	  showNotif('PLACING ' + buttonId.toUpperCase() + ' ORDER');
-	  var team_id = document.getElementById('team_id').value;
+	  showNotif('PLACING ' + buttonId.toUpperCase() + ' ORDER'); //try removing to UpperCase()
+	  var teamId = document.getElementById('team_id').value;
 	  var country = document.getElementById('country_name').value;
 	  var stockId = document.getElementById('main').value; //main-> stock ID
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value;
 	  var total_value = Math.round(parseFloat(qty * price)*100)/100  
-	  
-	  var start_cell= "G";
-	  var start_cell_ind = 2;
-	  switch(stockId) {
-		  case "BHEL"|"ALI":
-		    start_cell_ind= 2;
-		    break;
-		  case "ICIC":
-		    start_cell_ind= 82;
-		    break;
-		  case "IDEA":
-		    start_cell_ind= 162;
-		    break;
-		  case "RIL"|"ALI":
-		    start_cell_ind= 242;
-		    break;	
-		  case "SUN"|"JIN":
-		    start_cell_ind= 322;
-		    break;
-		  default:
-		    start_cell_ind= 2;
-	  }
-	  if(start_cell != null){ //fetch value of start cell and check
-	  	start_cell_ind += 1;
-		start_cell = start_cell + toString(start_cell_ind);
-	  }
+
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
-	       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
+	       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
 	       // The A1 notation of the values to retrieve.
-	       range: country+'!'+start_cell,  // TODO: Update placeholder value.
+	       range: 'TestUIn',  // TODO: Update placeholder value.
 	       // How the input data should be interpreted.
                valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       	   };
@@ -224,7 +199,7 @@ function updateMarketPrice() { //Google sheets api
 		   var valueRangeBody = {
 			 "values": [
 				    [
-				      qty,price,0,0,null,team_id
+				      qty,price,0,0,stockId,teamId
 				    ]
 			  ] 
 		   };
@@ -232,7 +207,7 @@ function updateMarketPrice() { //Google sheets api
 	   	    var valueRangeBody = {
 			 "values": [
 				    [
-				      0,0,qty,price,null,team_id
+				      0,0,qty,price,stockId,teamId
 				    ]
 			  ] 
 		   };
