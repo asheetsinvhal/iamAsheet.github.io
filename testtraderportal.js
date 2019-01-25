@@ -317,11 +317,8 @@ stock_action = function(buttonId) {
     request.then(function(response) {
             if (response.status == 200) {
                 showNotif(buttonId + ' ORDER SUCCESFUL');
-
-                //setTimeout( putCountryData, 2000);
-
-                //showPort();
-
+		makeApiCall();    
+                setTimeout( putCountryData, 1000);
             } else {
                 showNotif('! TRY AGAIN !');
                 //setTimeout(function() {
@@ -329,23 +326,13 @@ stock_action = function(buttonId) {
                 // document.getElementById('team_balance').innerHTML = '';
                 //  hidePort()}, 2000);
             }
-        })
-        .then(function(makeApiCall()) {})
-        .then(function(putCountryData()) {
-            // Display items here
             showPort();
-            document.getElementById('main')
-                .value = -1;
-            document.getElementById('quantity')
-                .setAttribute('placeholder', '');
-            document.getElementById('quantity')
-                .value = '';
-            document.getElementById('country_name')
-                .value = '';
-            document.getElementById('team_id')
-                .value = '';
-            document.getElementById('price')
-                .value = '';
+	    document.getElementById('country_name').value = '';
+            document.getElementById('main').value = -1;
+            document.getElementById('quantity').setAttribute('placeholder', '');
+            document.getElementById('quantity').value = '';
+            document.getElementById('team_id').value = '';
+            document.getElementById('price').value = '';
         }, function(reason) {
             console.error('error: ' + reason.result.error.message);
         });
@@ -358,17 +345,12 @@ function showNotif(text, background = "white", color = "black") {
             showNotif(text, background)
         }, 2000);
     } else {
-        document.getElementById('notif')
-            .innerHTML = text;
-        document.getElementById('notif')
-            .style.background = background;
-        document.getElementById('notif')
-            .style.display = 'block';
-        document.getElementById('notif')
-            .style.color = color;
+        document.getElementById('notif').innerHTML = text;
+        document.getElementById('notif').style.background = background;
+        document.getElementById('notif').style.display = 'block';
+        document.getElementById('notif').style.color = color;
         setTimeout(function() {
-            document.getElementById('notif')
-                .style.display = 'none'
+            document.getElementById('notif').style.display = 'none'
         }, 2100);
     }
 }
