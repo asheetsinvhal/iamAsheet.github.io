@@ -277,9 +277,9 @@ function calculateLimits(cmp){
  }
  
  validate_Inputs = function(teamId,country,stockId,qty,price) {
-	 if( teamId == "" || country == "" ||stockId == "" ||qty == "" ||price == "" ||){
+	 if( teamId == "" || country == "" || stockId == "" || qty == "" || price == ""){
 	    	showNotif('DATA MISSING!');
-		 return;
+		return;
 	 }
 	 if( parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt){
 		 showNotif('PRICE EXCEEDS ±20% !');
@@ -291,7 +291,7 @@ function calculateLimits(cmp){
 	  if(document.getElementById('notif').style.display == 'block') {
 	    setTimeout(function(){showNotif(text, background)},2000);
 	  } else {
-	   document.getElementById('notif').innerHTML = text.toUpperCase();
+	   document.getElementById('notif').innerHTML = text;
 	   document.getElementById('notif').style.background = background;
 	   document.getElementById('notif').style.display = 'block';
 	   document.getElementById('notif').style.color = color;
