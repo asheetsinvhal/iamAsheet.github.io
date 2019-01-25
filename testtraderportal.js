@@ -95,6 +95,7 @@
  putCountryData = function() {  //change to putTeamData
     team_id = document.getElementById('team_id').value;
     country_name = document.getElementById('country_name').value;
+	// Team name  & Balance 
     document.getElementById('team_name').innerHTML = team_data[team_id][1];
     document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][8]*100)/100;	 
     
@@ -179,7 +180,8 @@ function updateMarketPrice() { //Google sheets api
 		    break;
 		} 
    	   } 
-	   calculateLimits(stk_price);
+	   upper_ckt =  Math.round(parseFloat(1.2*cmp)*100)/100;
+	   lower_ckt = Math.round(parseFloat(0.8*cmp)*100)/100;
 	   document.getElementById('price').value = stk_price ? Math.round(parseFloat(stk_price)*100)/100:0;
            document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+max_stk_qty?max_stk_qty:0);    
        }
@@ -187,10 +189,6 @@ function updateMarketPrice() { //Google sheets api
        console.error('error: ' + reason.result.error.message);
      });
    } 
-function calculateLimits(cmp){
-	upper_ckt =  Math.round(parseFloat(1.2*cmp)*100)/100;
-	lower_ckt = Math.round(parseFloat(0.8*cmp)*100)/100;
-}
 
  /* var $form = $('form#test-form'),
       url = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
@@ -230,7 +228,7 @@ function calculateLimits(cmp){
 	       // How the input data should be interpreted.
                valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       	   };
-	   if(buttonId == "buy" ){
+	   if(buttonId == "BUY" ){
 		   var valueRangeBody = {
 			 "values": [
 				    [
@@ -248,27 +246,13 @@ function calculateLimits(cmp){
 		   };
 	   }
 	
-	/*var $form = $('form#test-form'),
-      scriptURL = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
-	const form = document.forms['contact'] 
-	form.addEventListener('submit', e => {  
-	   e.preventDefault()  
-	   fetch(scriptURL, { method: 'POST', body: new FormData(form)})  
-	    .then(response => console.log('Success!', response))  
-	    .catch(error => console.error('Error!', error.message))  
-	 })  */
         var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
         request.then(function(response) {
-	  document.getElementById('main').value = -1;
-	  document.getElementById('quantity').setAttribute('placeholder','');
-	  document.getElementById('quantity').value = '';
-	  document.getElementById('country_name').value = '';
-	  document.getElementById('team_id').value = '';
-	  document.getElementById('price').value = '';
 	 if(response.status == 200){
  	    showNotif(buttonId + ' ORDER SUCCESFUL');
 	    makeApiCall();
-	    setTimeout( getPortfolio, 2000);
+	    setTimeout( putCountryData, 2000);
+	    setTimeout( getPortfolio, 1000);
 	    showPort();
 	 }
 	 else{ 
@@ -278,6 +262,12 @@ function calculateLimits(cmp){
 		    // document.getElementById('team_balance').innerHTML = '';
 		   //  hidePort()}, 2000);
 	 }
+	  document.getElementById('main').value = -1;
+	  document.getElementById('quantity').setAttribute('placeholder','');
+	  document.getElementById('quantity').value = '';
+	  document.getElementById('country_name').value = '';
+	  document.getElementById('team_id').value = '';
+	  document.getElementById('price').value = '';
          },function(reason) {
        		console.error('error: ' + reason.result.error.message);
 	 });
@@ -294,3 +284,15 @@ function calculateLimits(cmp){
 	   setTimeout(function(){document.getElementById('notif').style.display = 'none'},2100);
 	  }
  }
+
+	/*var myVar = setInterval(myTimer, 1000);
+	
+	var $form = $('form#test-form'),
+      scriptURL = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
+	const form = document.forms['contact'] 
+	form.addEventListener('submit', e => {  
+	   e.preventDefault()  
+	   fetch(scriptURL, { method: 'POST', body: new FormData(form)})  
+	    .then(response => console.log('Success!', response))  
+	    .catch(error => console.error('Error!', error.message))  
+	 })  */
