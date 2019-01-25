@@ -250,8 +250,8 @@ function updateMarketPrice() { //Google sheets api
         request.then(function(response) {
 	 if(response.status == 200){
  	    showNotif(buttonId + ' ORDER SUCCESFUL');
-	    makeApiCall();
-	    setTimeout( putCountryData, 2000);
+	    makeApiCall().then(putCountryData);
+	    //setTimeout( putCountryData, 2000);
 	    setTimeout( getPortfolio, 1000);
 	    showPort();
 	 }
