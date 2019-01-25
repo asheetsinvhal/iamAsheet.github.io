@@ -188,8 +188,8 @@ function updateMarketPrice() { //Google sheets api
      });
    } 
 function calculateLimits(cmp){
-	upper_ckt = 1.2 * cmp;
-	lower_ckt = 0.8 * cmp;
+	upper_ckt =  Math.round(parseFloat(1.2*cmp)*100)/100;
+	lower_ckt = Math.round(parseFloat(0.8*cmp)*100)/100;
 }
 
  /* var $form = $('form#test-form'),
@@ -214,14 +214,10 @@ function calculateLimits(cmp){
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value;
 	  var total_value = Math.round(parseFloat(qty * price)*100)/100  
-	//if()else{}  ADD QTY AND PRICE VALIDATIONS HERE
-	 if( price > upper_ckt || price < lower_ckt){
+	
+	 if( parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt){
 		 showNotif('PRICE EXCEEDS ±20% !');
 		 return;
-	 }
-	 if( qty > max_stk_qty){
-		showNotif('QUANTITY EXCEEDS YOUR HOLDINGS !');
-		return; 
 	 }
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
