@@ -222,7 +222,7 @@ function calculateLimits(cmp){
 	 if( qty > max_stk_qty){
 		showNotif('QUANTITY EXCEEDS YOUR HOLDINGS !');
 		return; 
-	 }_
+	 }
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
