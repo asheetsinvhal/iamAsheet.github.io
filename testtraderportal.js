@@ -211,7 +211,7 @@ function updateMarketPrice() { //Google sheets api
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value; 
 	  if( teamId == "-1" || country == "-1" || stockId == "" || qty == "" || price == ""){
-	    	showNotif('DATA MISSING!');
+	    	showNotif('	DATA MISSING!');
 		return;
 	  }
 	  showNotif('PLACING ' + buttonId + ' ORDER'); 
@@ -248,27 +248,32 @@ function updateMarketPrice() { //Google sheets api
 	
         var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
         request.then(function(response) {
-	 if(response.status == 200){
- 	    showNotif(buttonId + ' ORDER SUCCESFUL');
-	    makeApiCall().then(putCountryData);
-	    //setTimeout( putCountryData, 2000);
-	    setTimeout( getPortfolio, 1000);
-	    showPort();
-	 }
-	 else{ 
-	     showNotif('! TRY AGAIN !');
-	     //setTimeout(function() {
-		    // document.getElementById('team_name').innerHTML = '';
-		    // document.getElementById('team_balance').innerHTML = '';
-		   //  hidePort()}, 2000);
-	 }
-	  document.getElementById('main').value = -1;
-	  document.getElementById('quantity').setAttribute('placeholder','');
-	  document.getElementById('quantity').value = '';
-	  document.getElementById('country_name').value = '';
-	  document.getElementById('team_id').value = '';
-	  document.getElementById('price').value = '';
-         },function(reason) {
+		 if(response.status == 200){
+		    showNotif(buttonId + ' ORDER SUCCESFUL');
+		    refreshData.then(putCountryData);
+		    //setTimeout( putCountryData, 2000);
+		    setTimeout( getPortfolio, 1000);
+		    showPort();
+		    
+		 }
+		 else{ 
+		     showNotif('! TRY AGAIN !');
+		     //setTimeout(function() {
+			    // document.getElementById('team_name').innerHTML = '';
+			    // document.getElementById('team_balance').innerHTML = '';
+			   //  hidePort()}, 2000);
+		 }
+         }).then(function(makeApiCall) {
+       	 }).then(function(putCountryData) {
+   	 }).then(function(getPortfolio) {
+		// Display items here
+	    	    document.getElementById('main').value = -1;
+		    document.getElementById('quantity').setAttribute('placeholder','');
+		    document.getElementById('quantity').value = '';
+		    document.getElementById('country_name').value = '';
+		    document.getElementById('team_id').value = '';
+		    document.getElementById('price').value = '';
+	 },function(reason) {
        		console.error('error: ' + reason.result.error.message);
 	 });
  }
