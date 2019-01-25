@@ -184,7 +184,20 @@ function updateMarketPrice() { //Google sheets api
        console.error('error: ' + reason.result.error.message);
      });
    } 
+ /* var $form = $('form#test-form'),
+      url = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
 
+	$('#submit-form').on('click', function(e) {
+	  e.preventDefault();
+	  var jqxhr = $.ajax({
+	    url: url,
+	    method: "GET",
+	    dataType: "json",
+	    data: $form.serializeObject()
+	  }).success(
+	    // do something
+	  );
+	})*/
  stock_action = function(buttonId) {   
 	  showNotif('PLACING ' + buttonId.toUpperCase() + ' ORDER'); //try removing to UpperCase()
 	  var teamId = document.getElementById('team_id').value;
@@ -220,7 +233,16 @@ function updateMarketPrice() { //Google sheets api
 		   };
 	   }
 		//if()else{}  ADD QTY AND PRICE VALIDATIONS HERE
-        var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+	/*var $form = $('form#test-form'),
+      scriptURL = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
+	const form = document.forms['contact'] 
+	form.addEventListener('submit', e => {  
+	   e.preventDefault()  
+	   fetch(scriptURL, { method: 'POST', body: new FormData(form)})  
+	    .then(response => console.log('Success!', response))  
+	    .catch(error => console.error('Error!', error.message))  
+	 })  */
+        var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
         request.then(function(response) {
 	  document.getElementById('main').value = -1;
 	  document.getElementById('quantity').setAttribute('placeholder','');
@@ -245,35 +267,7 @@ function updateMarketPrice() { //Google sheets api
        		console.error('error: ' + reason.result.error.message);
 	 });
  }
-/*
- sell_stock = function() { //selling
-	  showNotif('PLACING SELL ORDER');
-	  stock = document.getElementById('main').value;
-	  quantity = document.getElementById('quantity').value;
-	  price = document.getElementById('price').value;
-	  team_id = document.getElementById('team_id').value;
-	  country = document.getElementById('country_name').value;
-	  document.getElementById('main').value = -1;
-	  document.getElementById('price').value = '';
-	  document.getElementById('quantity').setAttribute('placeholder','');
-	  document.getElementById('quantity').value = '';
-	  document.getElementById('country_name').value = '';
-	  document.getElementById('team_id').value = '';
-	  var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	    getPortfolio();
-	    response = this.responseText;
-	    if(!response.includes('ERROR')) { document.getElementById('team_balance').innerHTML  = Math.round(parseFloat(response)*100)/100;showNotif('SELL ORDER SUCCESFUL'); }
-	    else { showNotif(response, "#ff0035", "white"); }
-	    setTimeout(function() {document.getElementById('team_name').innerHTML = '';document.getElementById('team_balance').innerHTML = '';hidePort()} , 5000);
-	   // refreshTeamData();
-	   }
-	  };
-	  xhttp.open("GET", "sell?stock="+encodeURIComponent(stock)+"&quantity="+quantity+"&price="+price+"&team_id="+team_id+"&country="+country, true);
-	  xhttp.send();
-}
-*/
+
  function showNotif(text, background="white",color="black") {
 	  if(document.getElementById('notif').style.display == 'block') {
 	    setTimeout(function(){showNotif(text, background)},2000);
