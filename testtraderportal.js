@@ -121,7 +121,7 @@
 		main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] +'</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value +'</div>'+'</div>';
 	    	stock_count+=1;
 	     }
-	     if(stock_count == 5)
+	     if(stock_count == 5 )
 		     break;
 	 }    
 	 main_p.innerHTML += '</div>';
@@ -207,18 +207,14 @@ function calculateLimits(cmp){
 	  );
 	})*/
  stock_action = function(buttonId) {   
-	  showNotif('PLACING ' + buttonId.toUpperCase() + ' ORDER'); //try removing to UpperCase()
+	  showNotif('PLACING ' + buttonId + ' ORDER'); 
 	  var teamId = document.getElementById('team_id').value;
 	  var country = document.getElementById('country_name').value;
 	  var stockId = document.getElementById('main').value; //main-> stock ID
 	  var qty = document.getElementById('quantity').value;
-	  var price = document.getElementById('price').value;
-	  var total_value = Math.round(parseFloat(qty * price)*100)/100  
-	
-	 if( parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt){
-		 showNotif('PRICE EXCEEDS ±20% !');
-		 return;
-	 }
+	  var price = document.getElementById('price').value; 
+	  validate_Inputs(teamId,country,stockId,qty,price);
+	 
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
@@ -263,13 +259,13 @@ function calculateLimits(cmp){
 	  document.getElementById('team_id').value = '';
 	  document.getElementById('price').value = '';
 	 if(response.status == 200){
- 	    showNotif(buttonId.toUpperCase() + ' ORDER SUCCESFUL');
+ 	    showNotif(buttonId + ' ORDER SUCCESFUL');
 	    makeApiCall();
 	    setTimeout( getPortfolio, 2000);
 	    showPort();
 	 }
 	 else{ 
-	     showNotif('! TRY AGAIN !', "#ff0035", "white");
+	     showNotif('! TRY AGAIN !');
 	     //setTimeout(function() {
 		    // document.getElementById('team_name').innerHTML = '';
 		    // document.getElementById('team_balance').innerHTML = '';
@@ -278,6 +274,17 @@ function calculateLimits(cmp){
          },function(reason) {
        		console.error('error: ' + reason.result.error.message);
 	 });
+ }
+ 
+ validate_Inputs = function(teamId,country,stockId,qty,price) {
+	 if( teamId == "" || country == "" ||stockId == "" ||qty == "" ||price == "" ||){
+	    	showNotif('DATA MISSING!');
+		 return;
+	 }
+	 if( parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt){
+		 showNotif('PRICE EXCEEDS ±20% !');
+		 return;
+	 }
  }
 
  function showNotif(text, background="white",color="black") {
