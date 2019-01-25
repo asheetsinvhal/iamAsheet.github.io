@@ -52,7 +52,7 @@
  function makeApiCall() { //Google sheets api
      var params = {
        // The ID of the spreadsheet to retrieve data from.
-       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
+       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
        // The A1 notation of the values to retrieve.
        ranges: ['Stock_Names','Stock_Prices','PortfolioR1','TeamScoresR1'],
 	//ranges: ['Stock_Names','Stock_Prices','PortfolioR2','TeamScoresR2'],  // For ROund2
@@ -148,7 +148,7 @@ function updateMarketPrice() { //Google sheets api
      shares = [];	
      var params = {
        // The ID of the spreadsheet to retrieve data from.
-       spreadsheetId: '1f_loFgviaOT7HavKmgFwn02a1zbFG66GHQ5qvOF6Wj8', 
+       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
        // The A1 notation of the values to retrieve.
        ranges: 'Stock_Prices',  // TODO: Update placeholder value.
 
