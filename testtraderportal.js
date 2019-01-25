@@ -10,6 +10,9 @@
  var stocks;
  var portfolio_data;
  var team_data;
+ var upper_ckt;
+ var lower_ckt;
+ var max_stk_qty = 0;
  function initClient() {
      var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s';  // TODO: Update placeholder with desired API key.
      var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
@@ -93,7 +96,7 @@
     team_id = document.getElementById('team_id').value;
     country_name = document.getElementById('country_name').value;
     document.getElementById('team_name').innerHTML = team_data[team_id][1];
-    document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][2]*100)/100;	 
+    document.getElementById('team_balance').innerHTML  = Math.round(team_data[team_id][8]*100)/100;	 
     
     main_content = document.getElementById('main');
     main_content.innerHTML = '<option>-</option>';
@@ -165,9 +168,8 @@ function updateMarketPrice() { //Google sheets api
 
      var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
      request.then(function(response) {
-       var stk_price = 0;
-       var max_stk_qty = 0;
-       var stockId = document.getElementById('main').value; 
+     var stk_price = 0;
+     var stockId = document.getElementById('main').value; 
        if(response.status == 200 && response.result.valueRanges[0] != null){
     	   shares = response.result.valueRanges[0].values;             // refreshed values of stocks
 	   for(var k=1; k < shares.length ; k+=1){
@@ -177,6 +179,7 @@ function updateMarketPrice() { //Google sheets api
 		    break;
 		} 
    	   } 
+	   calculateLimits(stk_price);
 	   document.getElementById('price').value = stk_price ? Math.round(parseFloat(stk_price)*100)/100:0;
            document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+max_stk_qty?max_stk_qty:0);    
        }
@@ -184,6 +187,11 @@ function updateMarketPrice() { //Google sheets api
        console.error('error: ' + reason.result.error.message);
      });
    } 
+function calculateLimits(cmp){
+	upper_ckt = 1.2 * cmp;
+	lower_ckt = 0.8 * cmp;
+}
+
  /* var $form = $('form#test-form'),
       url = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
 
@@ -206,7 +214,15 @@ function updateMarketPrice() { //Google sheets api
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value;
 	  var total_value = Math.round(parseFloat(qty * price)*100)/100  
-
+	//if()else{}  ADD QTY AND PRICE VALIDATIONS HERE
+	 if( price > upper_ckt || price < lower_ckt){
+		 showNotif('PRICE EXCEEDS ±20% !');
+		 return;
+	 }
+	 if( qty > max_stk_qty){
+		showNotif('QUANTITY EXCEEDS YOUR HOLDINGS !');
+		return; 
+	 }_
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
@@ -232,7 +248,7 @@ function updateMarketPrice() { //Google sheets api
 			  ] 
 		   };
 	   }
-		//if()else{}  ADD QTY AND PRICE VALIDATIONS HERE
+	
 	/*var $form = $('form#test-form'),
       scriptURL = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
 	const form = document.forms['contact'] 
