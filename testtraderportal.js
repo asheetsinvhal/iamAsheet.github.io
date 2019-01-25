@@ -180,8 +180,8 @@ function updateMarketPrice() { //Google sheets api
 		    break;
 		} 
    	   } 
-	   upper_ckt =  Math.round(parseFloat(1.2*cmp)*100)/100;
-	   lower_ckt = Math.round(parseFloat(0.8*cmp)*100)/100;
+	   upper_ckt =  Math.round(parseFloat(1.20*stk_price)*100)/100;
+	   lower_ckt = Math.round(parseFloat(0.80*stk_price)*100)/100;
 	   document.getElementById('price').value = stk_price ? Math.round(parseFloat(stk_price)*100)/100:0;
            document.getElementById('quantity').setAttribute('placeholder','MAX BUY '+max_stk_qty?max_stk_qty:0);    
        }
