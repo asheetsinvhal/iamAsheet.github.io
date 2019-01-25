@@ -206,15 +206,22 @@ function calculateLimits(cmp){
 	    // do something
 	  );
 	})*/
- stock_action = function(buttonId) {   
-	  showNotif('PLACING ' + buttonId + ' ORDER'); 
+ stock_action = function(buttonId) { 
 	  var teamId = document.getElementById('team_id').value;
 	  var country = document.getElementById('country_name').value;
 	  var stockId = document.getElementById('main').value; //main-> stock ID
 	  var qty = document.getElementById('quantity').value;
 	  var price = document.getElementById('price').value; 
-	  validate_Inputs(teamId,country,stockId,qty,price);
-	 
+	  if( teamId == "-1" || country == "-1" || stockId == "" || qty == "" || price == ""){
+	    	showNotif('DATA MISSING!');
+		return;
+	  }
+	  showNotif('PLACING ' + buttonId + ' ORDER'); 
+	  if( parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt){
+		 showNotif('PRICE EXCEEDS ±20% !');
+		 return;
+	  }
+	  
 	  var params = {
 	       // The ID of the spreadsheet to retrieve data from.
 	       spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ', 
@@ -274,17 +281,6 @@ function calculateLimits(cmp){
          },function(reason) {
        		console.error('error: ' + reason.result.error.message);
 	 });
- }
- 
- validate_Inputs = function(teamId,country,stockId,qty,price) {
-	 if( teamId == "" || country == "" || stockId == "" || qty == "" || price == ""){
-	    	showNotif('DATA MISSING!');
-		return;
-	 }
-	 if( parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt){
-		 showNotif('PRICE EXCEEDS ±20% !');
-		 return;
-	 }
  }
 
  function showNotif(text, background="white",color="black") {
