@@ -46,17 +46,13 @@ function makeApiCall() { //Google sheets api
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        ranges: ['Stock_Prices'],   
+        ranges: 'Stock_Prices',   
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
         valueRenderOption: 'UNFORMATTED_VALUE', // TODO: Update placeholder value.
 
-        // How dates, times, and durations should be represented in the output.
-        // This is ignored if value_render_option is
-        // FORMATTED_VALUE.
-        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-        dateTimeRenderOption: 'FORMATTED_STRING', // TODO: Update placeholder value.
+        majorDimension: 'COLUMNS', // TODO: Update placeholder value.
     };
 
     var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
@@ -66,7 +62,7 @@ function makeApiCall() { //Google sheets api
         if (response.status == 200) {
             var all_data = response.result;
             stocks_data = all_data.valueRanges[0].values;
-	    			loadStockTable();
+	          loadStockTable();
         }
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
