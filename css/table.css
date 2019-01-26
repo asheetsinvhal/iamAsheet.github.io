@@ -55,6 +55,7 @@ h2 a {
 }
 
 .container td {
+	  font-family: 'Montserrat';
 	  font-weight: bold;
 	  font-size: 1.5em;
           -webkit-box-shadow: 0 2px 2px -2px #0E1119;
@@ -71,15 +72,13 @@ h2 a {
           padding: 0 0 2em 0;
 }
 
-
-
 .container td, .container th {
 	  text-align: center;
 	  padding-bottom: 2%;
 	  padding-top: 2%;
-  padding-left:2%;
-  padding-right:2%;
-  background-color: #323C50;
+	  padding-left:2%;
+	  padding-right:2%;
+	  background-color: #323C50;
 }
 .container th {
 	  background-color: #ffffaa;
