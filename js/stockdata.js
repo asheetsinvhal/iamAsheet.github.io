@@ -9,6 +9,7 @@ var country_name2;
 var tableData;
 var cell1, cell2, cell3, cell4;
 var updatePriceRun = 0;
+var refreshIntervalId = 0;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
@@ -71,8 +72,10 @@ function makeApiCall() { //Google sheets api
     });
 }
 
-
 loadStockTable = function() {
+	  if(refreshIntervalId != 0){
+			  clearInterval(refreshIntervalId);
+		}
 	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
 	  resetTable(tableData);
     var stock_count = 0; 
@@ -99,7 +102,7 @@ loadStockTable = function() {
     }
 	  if( updatePriceRun == 0){
 			   updatePriceRun = 1;
-			   setInterval(updatePriceData, 6200);
+			   refreshIntervalId = setInterval(updatePriceData, 9000);
 		}
 }
 
