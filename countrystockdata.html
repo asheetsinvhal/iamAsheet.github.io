@@ -13,30 +13,18 @@
 </head>
 <body  onload="handleSignInClick()">
 <p class="big-title">COUNTRY STOCK DATA</p>
+	
 <div id='country-select-holder' style="display: inline-block;">
   	<label style="margin-left:20px;">Country 1:
-			 <select id="country_name1" name="country_name1" onclick="loadStockTable1();">
+			 <select id="country_name1" name="country_name1" onchange="loadStockTable1();">
 					<option value=-1>-</option>
 						<option>INDIA</option>   
-						<!--<option>AUSTRALIA</option>
 						<option>CHINA</option>
 						<option>ENGLAND</option>
-						<option>GERMANY</option>-->
-						<option>CHINA</option>
-						<option>ENGLAND</option>
-        </select>
-    </label> 
-		<label style="margin-left:80px;">Country 2:
-			 <select id="country_name2" name="country_name2" onchange="loadStockTable2();">
-						<option value=-1>-</option> 
-						<option>AUSTRALIA</option>
-						<option>GERMANY</option>
-						<option>JAPAN</option>
-						<option>USA</option>
         </select>
     </label>
 </div>
-<table class="container" id="stockTable">
+<table class="container1" id="stockTable1">
 		<thead>
 			<tr>
 				<th><h1>StockID</h1></th>
@@ -48,9 +36,29 @@
 		<tbody>
 		</tbody>
 </table>
- <!--<div id='overlap-1'>
- </div>
- <div id="main-body">
- </div>-->
+	
+<div id='country-select-holder' style="display: inline-block;">	
+	<label style="margin-left:20px;">Country 2:
+			 <select id="country_name2" name="country_name2" onchange="loadStockTable2();">
+						<option value=-1>-</option> 
+						<option>AUSTRALIA</option>
+						<option>GERMANY</option>
+						<option>JAPAN</option>
+						<option>USA</option>
+        </select>
+    </label>
+	</div>
+<table class="container2" id="stockTable2">
+		<thead>
+			<tr>
+				<th><h1>StockID</h1></th>
+				<th><h1>Name</h1></th>
+				<th><h1>CMP</h1></th>
+				<th><h1>Change</h1></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+</table>
 </body>
 </html>
