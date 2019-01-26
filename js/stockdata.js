@@ -118,9 +118,13 @@ loadStockTable = function() {
 	}*/
 
 	function resetTable(tableData) {
-		 var rowCount = tableData.rows.length;
-		for (var i = rowCount - 1; i > 0; i--) {
-		    tableData.deleteRow(i);
+		if( tableData[0].rows){
+			 var rowCount = tableData[0].rows.length;
+			 for (var i = rowCount - 1; i > 0; i--) {
+					tableData.deleteRow(i);
+			 }
+		}else{
+			 return;		
 		}
 	}
 
