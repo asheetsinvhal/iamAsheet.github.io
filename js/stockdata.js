@@ -1,15 +1,19 @@
 /* Stock table data that shows price changes*/
 
-var old_cmp_list = [0];
-var new_cmp_list = [0];
+var old_cmp_list1 = [0];
+var new_cmp_list1 = [0];
+var old_cmp_list2 = [0];
+var new_cmp_list2 = [0];
 //var last_refresh = 'NEVER';
 var stocks_data; 
 var country_name1;
 var country_name2;
-var tableData;
+var tableData1;
+var tableData2;
 var cell1, cell2, cell3, cell4;
 //var updatePriceRun = 0;
-var refreshIntervalId = 0;
+var refreshIntervalId1 = 0;
+var refreshIntervalId2 = 0;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
@@ -72,18 +76,16 @@ function makeApiCall() { //Google sheets api
     });
 }
 
-loadStockTable = function() {
+loadStockTable1 = function() {
 		clearInterval(refreshIntervalId);
-	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
-	  resetTable(tableData);
-    var stock_count = 0; 
+	  tableData1 = document.getElementById('stockTable1').getElementsByTagName('tbody')[0];
+	  resetTable(tableData1);
+    var stock_count_t1 = 0; 
 	  country_name1 = document.getElementById('country_name1').value;
-	  country_name2 = document.getElementById('country_name2').value;
     for (var k = 1; k < stocks_data.length; k += 1) {
-				if(stocks_data[k][10] == country_name1 || stocks_data[k][10] == country_name2 ){
+				if(stocks_data[k][10] == country_name1){
 								var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
-								//main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
-								var row = tableData.insertRow(stock_count);
+								var row = tableData1.insertRow(stock_count_t1);
 								cell1 = row.insertCell(0);
 								cell1.innerHTML = stocks_data[k][0];
 								cell2 = row.insertCell(1);
@@ -92,23 +94,53 @@ loadStockTable = function() {
 								cell4 = row.insertCell(3);
 								cell3.innerHTML = cmp;
 								cell4.innerHTML = 0.00;
-								stock_count += 1;
+								stock_count_t1 += 1;
 				}
-				if( stock_count == 9){
+				if( stock_count_t1 == 5){
 					break;
 				}
     }
-	  if(stock_count == 9){
+	  if(stock_count_t1 == 5){
 			   //updatePriceRun = 1;
-			   refreshIntervalId = setInterval(updatePriceData, 9000);
-		}else if (country_name1=="INDIA" && stock_count == 4){
-				 refreshIntervalId = setInterval(updatePriceData, 9000);
-		}else{
+			   refreshIntervalId = setInterval(updatePriceData1, 8000);
+		}else {
 			   clearInterval(refreshIntervalId); 
 		}
 
 }
 
+loadStockTable2 = function() {
+		clearInterval(refreshIntervalId);
+	  tableData2 = document.getElementById('stockTable2').getElementsByTagName('tbody')[0];
+	  resetTable(tableData2);
+    var stock_count_t2 = 0; 
+	  country_name2 = document.getElementById('country_name2').value;
+    for (var k = 1; k < stocks_data.length; k += 1) {
+				if(stocks_data[k][10] == country_name2 ){
+								var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
+								var row = tableData2.insertRow(stock_count_t2);
+								cell1 = row.insertCell(0);
+								cell1.innerHTML = stocks_data[k][0];
+								cell2 = row.insertCell(1);
+								cell2.innerHTML = stocks_data[k][1];
+								cell3 = row.insertCell(2);
+								cell4 = row.insertCell(3);
+								cell3.innerHTML = cmp;
+								cell4.innerHTML = 0.00;
+								stock_count_t2 += 1;
+				}
+				if( stock_count_t2 == 5){
+					break;
+				}
+    }
+	  if(stock_count_t2 == 5){
+			   //updatePriceRun = 1;
+			   refreshIntervalId = setInterval(updatePriceData2, 8000);
+		}else {
+			   clearInterval(refreshIntervalId); 
+		}
+
+}
 
 	function resetTable(tableData) {
 		if( tableData.rows){
@@ -121,26 +153,26 @@ loadStockTable = function() {
 		}
 	}
 
-	function updatePriceData() {
-		  var stk_table = document.getElementById('stockTable');
+	function updatePriceData1() {
+		  var stk_table = document.getElementById('stockTable1');
 			for (var r = 1, n = stk_table.rows.length; r < n; r+=1) {
-						var old_cmp= Math.round(parseFloat(stk_table.rows[r].cells[2].innerHTML) * 100)/100;
-						old_cmp_list.push(old_cmp);
+						var old_cmp = Math.round(parseFloat(stk_table.rows[r].cells[2].innerHTML) * 100)/100;
+						old_cmp_list1.push(old_cmp);
 			}
 			
 		  makeApiCall();
 		  for(var j = 1; j < stocks_data.length; j += 1){
-				 if(stocks_data[j][10] == country_name1 || stocks_data[j][10] == country_name2 ){
+				 if(stocks_data[j][10] == country_name1){
 					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
-				 			new_cmp_list.push(new_cmp);
+				 			new_cmp_list1.push(new_cmp);
 				 }
-				 if( new_cmp_list.length == 10){
+				 if( new_cmp_list1.length == 10){
 				 		break;
 				 }
 		  }
-	    for(var i=1; i<new_cmp_list.length; i+=1 ) {
-	      var curr = new_cmp_list[i];
-	      var old  = old_cmp_list[i];
+	    for(var i=1; i<new_cmp_list1.length; i+=1 ) {
+	      var curr = new_cmp_list1[i];
+	      var old  = old_cmp_list1[i];
 	      if(curr < old) {
 					 stk_table.rows[i].cells[2].innerHTML = curr;
 					 stk_table.rows[i].cells[3].innerHTML = '&darr; ' + Math.round((old-curr)*100)/100;
@@ -158,6 +190,47 @@ loadStockTable = function() {
 					 //stk_table.rows[i].cells[3].style.color = '#47d147';
 	      }
 	    }
-	    old_cmp_list = [0];
-			new_cmp_list = [0];
+	    old_cmp_list1 = [0];
+			new_cmp_list1 = [0];
+	}
+
+function updatePriceData2() {
+		  var stk_table = document.getElementById('stockTable2');
+			for (var r = 1, n = stk_table.rows.length; r < n; r+=1) {
+						var old_cmp= Math.round(parseFloat(stk_table.rows[r].cells[2].innerHTML) * 100)/100;
+						old_cmp_list2.push(old_cmp);
+			}
+			
+		  makeApiCall();
+		  for(var j = 1; j < stocks_data.length; j += 1){
+				 if(stocks_data[j][10] == country_name2 ){
+					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
+				 			new_cmp_list2.push(new_cmp);
+				 }
+				 if( new_cmp_list2.length == 10){
+				 		break;
+				 }
+		  }
+	    for(var i=1; i<new_cmp_list2.length; i+=1 ) {
+	      var curr = new_cmp_list2[i];
+	      var old  = old_cmp_list2[i];
+	      if(curr < old) {
+					 stk_table.rows[i].cells[2].innerHTML = curr;
+					 stk_table.rows[i].cells[3].innerHTML = '&darr; ' + Math.round((old-curr)*100)/100;
+					 stk_table.rows[i].cells[3].style.background = '#e63900';
+					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
+					 //stk_table.rows[i].cells[3].style.background = '#323C50';
+					// stk_table.rows[i].cells[3].style.color = '#e63900';
+	      }
+	      else if(curr > old) {
+					 stk_table.rows[i].cells[2].innerHTML = curr;
+					 stk_table.rows[i].cells[3].innerHTML = '&uarr; ' + Math.round((curr-old)*100)/100;
+					 stk_table.rows[i].cells[3].style.background = '#47d147';
+					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
+					 //stk_table.rows[i].cells[3].style.background = '#323C50';
+					 //stk_table.rows[i].cells[3].style.color = '#47d147';
+	      }
+	    }
+	    old_cmp_list2 = [0];
+			new_cmp_list2 = [0];
 	}
