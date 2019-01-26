@@ -46,7 +46,7 @@ function makeApiCall() { //Google sheets api
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        ranges: 'Stock_Prices',   
+        range: 'Stock_Prices',   
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
