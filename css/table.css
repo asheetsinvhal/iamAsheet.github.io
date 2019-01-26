@@ -63,7 +63,7 @@ h2 a {
 .container1 td, .container2 td  {
 	  font-family: 'Montserrat';
 	  font-weight: bold;
-	  font-size: 1.5em;
+	  font-size: 10px;
     -webkit-box-shadow: 0 2px 2px -2px #0E1119;
 	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
 	  box-shadow: 0 2px 2px -2px #0E1119;
@@ -74,16 +74,16 @@ h2 a {
 	  overflow: hidden;
 	  width: 80%;
 	  margin: 0 auto;
-          display: table;
-          padding: 0 0 2em 0;
+    display: table;
+    padding: 0 0 1.2% 0;
 }
 
 .container1 td, .container1 th, .container2 td, .container2 th {
 	  text-align: center;
-	  padding-bottom: 2%;
-	  padding-top: 2%;
-	  padding-left:2%;
-	  padding-right:2%;
+	  padding-bottom: 5px;
+	  padding-top: 5px;
+	  padding-left:5px;
+	  padding-right:5px;
 	  background-color: #323C50;
 }
 .container1 th,.container2 th {
