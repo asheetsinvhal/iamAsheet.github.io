@@ -146,8 +146,8 @@ loadStockTable = function() {
 				 }
 		  }
 	    for(var i=1; i<new_cmp_list.length; i+=1 ) {
-	      var curr = new_data[i];
-	      var old  = old_data[i];
+	      var curr = new_cmp_list[i];
+	      var old  = old_cmp_list[i];
 	      if(curr < old) {
 					 stk_table.rows[i].cells[3].innerHTML = '&darr;' + Math.round((old-curr)*100)/100;
 					 stk_table.rows[i].cells[3].style.background = '#e63900';
