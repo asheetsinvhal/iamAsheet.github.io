@@ -96,13 +96,13 @@ loadStockTable = function() {
 					break;
 				}
     }
-	  if( updatePriceRun == 0){
+	  /*if( updatePriceRun == 0){
 			   updatePriceRun = 1;
 			   setInterval(updatePriceData, 10000);
-		}
+		}*/
 }
 
-	function checkLastUpdate(country) {
+/*	function checkLastUpdate(country) {
 	 var xhttp = new XMLHttpRequest();
 	 xhttp.onreadystatechange = function() {
 	   if (this.readyState == 4 && this.status == 200) {
@@ -114,7 +114,7 @@ loadStockTable = function() {
 	  };
 	  xhttp.open("GET", "last", true);
 	  xhttp.send();
-	}
+	}*/
 
 	function resetTable(tableData) {
 		 var rowCount = tableData.rows.length;
