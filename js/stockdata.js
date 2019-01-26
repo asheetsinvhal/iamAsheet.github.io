@@ -3,9 +3,9 @@
 var old_cmp_list = [0];
 var new_cmp_list = [0];
 //var last_refresh = 'NEVER';
+var stocks_data; 
 var country_name1;
 var country_name2;
-var stocks_data; 
 var tableData;
 var cell1, cell2, cell3, cell4;
 var updatePriceRun = 0;
