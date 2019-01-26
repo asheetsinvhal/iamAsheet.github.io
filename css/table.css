@@ -47,23 +47,29 @@ h2 a {
 .blue { color: #185875; }
 .yellow { color: #FFF842; }
 
-.container th h1 {
-	  font-weight: bold;
-	  font-size: 1.5em;
-  text-align: centre;
-  color: #185875;
+.container1 th h1 {
+	 font-weight: bold;
+	 font-size: 1.5em;
+   text-align: centre;
+   color: #185875;
 }
 
-.container td {
+.container2 th h1 {
+	 font-weight: bold;
+	 font-size: 1.5em;
+   text-align: centre;
+   color: #185875;
+}
+.container1 td, .container2 td  {
 	  font-family: 'Montserrat';
 	  font-weight: bold;
 	  font-size: 1.5em;
-          -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
-	        box-shadow: 0 2px 2px -2px #0E1119;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	  box-shadow: 0 2px 2px -2px #0E1119;
 }
 
-.container {
+.container1, .container2  {
 	  text-align: left;
 	  overflow: hidden;
 	  width: 80%;
@@ -72,7 +78,7 @@ h2 a {
           padding: 0 0 2em 0;
 }
 
-.container td, .container th {
+.container1 td, .container1 th, .container2 td, .container2 th {
 	  text-align: center;
 	  padding-bottom: 2%;
 	  padding-top: 2%;
@@ -80,12 +86,12 @@ h2 a {
 	  padding-right:2%;
 	  background-color: #323C50;
 }
-.container th {
+.container1 th,.container2 th {
 	  background-color: #ffffaa;
 }
 
-.container td:first-child { color: #FB667A; }
-
+.container1 td:first-child { color: #FB667A; }
+.container2 td:first-child { color: #FB667A; }
 @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
