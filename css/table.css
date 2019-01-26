@@ -44,8 +44,7 @@ h2 a {
   text-decoration: none;
 }
 
-.blue { color: #185875; }
-.yellow { color: #FFF842; }
+
 
 .container1 th h1 {
 	 font-weight: bold;
@@ -61,9 +60,10 @@ h2 a {
    color: #185875;
 }
 .container1 td, .container2 td  {
-	  font-family: 'Montserrat';
+	  font-family: 'Open Sans', sans-serif;
+	  font-variant-numeric: slashed-zero;
 	  font-weight: bold;
-	  font-size: 10px;
+	  font-size: 7px;
     -webkit-box-shadow: 0 2px 2px -2px #0E1119;
 	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
 	  box-shadow: 0 2px 2px -2px #0E1119;
@@ -75,7 +75,7 @@ h2 a {
 	  width: 80%;
 	  margin: 0 auto;
     display: table;
-    padding: 0 0 1.2% 0;
+    padding: 0 0 1% 0;
 }
 
 .container1 td, .container1 th, .container2 td, .container2 th {
