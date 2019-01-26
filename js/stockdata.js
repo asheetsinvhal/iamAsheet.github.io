@@ -74,15 +74,15 @@ function makeApiCall() { //Google sheets api
 
 loadStockTable = function() {
 	  tableData = document.getElementById('stockTable');
-    var stock_count = 0; //validate country
+    var stock_count = 1; 
 	  var country_name1 = "India";//document.getElementById('country-1')
 		var country_name2 ="";//document.getElementById('country-2')
     for (var k = 1; k < stocks_data.length; k += 1) {
 			if(stocks_data[k][10] == country_name1 || stocks_data[k][10] == country_name2 ){
-					if (stocks_data[k][0]) {
+					while( stock_count < 6)  {
 							var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
 							//main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
-							var row = tableData.insertRow(1);
+							var row = tableData.insertRow(stock_count);
 							cell1 = row.insertCell(0);
 							cell2 = row.insertCell(1);
 							cell3 = row.insertCell(2);
