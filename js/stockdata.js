@@ -8,7 +8,7 @@ var country_name1;
 var country_name2;
 var tableData;
 var cell1, cell2, cell3, cell4;
-var updatePriceRun = 0;
+//var updatePriceRun = 0;
 var refreshIntervalId = 0;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
@@ -73,9 +73,7 @@ function makeApiCall() { //Google sheets api
 }
 
 loadStockTable = function() {
-	  if(refreshIntervalId != 0){
-			  clearInterval(refreshIntervalId);
-		}
+		clearInterval(refreshIntervalId);
 	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
 	  resetTable(tableData);
     var stock_count = 0; 
@@ -100,25 +98,17 @@ loadStockTable = function() {
 					break;
 				}
     }
-	  if( updatePriceRun == 0){
-			   updatePriceRun = 1;
+	  if(stock_count == 9){
+			   //updatePriceRun = 1;
 			   refreshIntervalId = setInterval(updatePriceData, 9000);
+		}else if (country_name1=="INDIA" && stock_count == 4){
+				 refreshIntervalId = setInterval(updatePriceData, 9000);
+		}else{
+			   clearInterval(refreshIntervalId); 
 		}
+
 }
 
-/*	function checkLastUpdate(country) {
-	 var xhttp = new XMLHttpRequest();
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	    if(last_refresh != this.responseText) {
-	     updateCountryData(country);
-	    }
-	    last_refresh = this.responseText;
-	   }
-	  };
-	  xhttp.open("GET", "last", true);
-	  xhttp.send();
-	}*/
 
 	function resetTable(tableData) {
 		if( tableData.rows){
