@@ -73,7 +73,7 @@ function makeApiCall() { //Google sheets api
 
 
 loadStockTable = function() {
-	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody');
+	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
 	  resetTable(tableData);
     var stock_count = 1; 
 	  country_name1 = document.getElementById('country_name1').value;
@@ -82,7 +82,7 @@ loadStockTable = function() {
 				if(stocks_data[k][10] == country_name1 || stocks_data[k][10] == country_name2 ){
 								var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
 								//main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
-								var row = tableData[0].insertRow(stock_count);
+								var row = tableData.insertRow(stock_count);
 								cell1 = row.insertCell(0);
 								cell1.innerHTML = stocks_data[k][0];
 								cell2 = row.insertCell(1);
@@ -118,8 +118,8 @@ loadStockTable = function() {
 	}*/
 
 	function resetTable(tableData) {
-		if( tableData[0].rows){
-			 var rowCount = tableData[0].rows.length;
+		if( tableData.rows){
+			 var rowCount = tableData.rows.length;
 			 for (var i = rowCount - 1; i > 0; i--) {
 					tableData.deleteRow(i);
 			 }
