@@ -17,10 +17,7 @@ body {
  top: 0px;
  left: 0px;
 }
-#country-button-holder {
- width: 400px;
- margin: 0px auto;
-}
+
 .country-button {
  width: 100%;
  padding: 6px;
@@ -38,9 +35,9 @@ select {
  border: none;
  border-bottom: 1px solid white;
  color: white;
- font-size: 28px;
+ font-size: 14px;
  outline: none;
- margin-bottom: 12px;
+ margin-bottom: 8px;
 }
 
 
