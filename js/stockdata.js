@@ -99,7 +99,7 @@ loadStockTable = function() {
     }
 	  if( updatePriceRun == 0){
 			   updatePriceRun = 1;
-			   setInterval(updatePriceData, 10000);
+			   setInterval(updatePriceData, 7000);
 		}
 }
 
@@ -120,7 +120,7 @@ loadStockTable = function() {
 	function resetTable(tableData) {
 		if( tableData.rows){
 			 var rowCount = tableData.rows.length;
-			 for (var i = rowCount - 1; i > 0; i--) {
+			 for (var i = rowCount; i > 0; i--) {
 					tableData.deleteRow(i);
 			 }
 		}else{
@@ -149,12 +149,14 @@ loadStockTable = function() {
 	      var curr = new_cmp_list[i];
 	      var old  = old_cmp_list[i];
 	      if(curr < old) {
-					 stk_table.rows[i].cells[3].innerHTML = '&darr;' + Math.round((old-curr)*100)/100;
+					 stk_table.rows[i].cells[2].innerHTML = curr;
+					 stk_table.rows[i].cells[3].innerHTML = '&darr; ' + Math.round((old-curr)*100)/100;
 					 stk_table.rows[i].cells[3].style.background = '#e63900';
 					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
 	      }
-	      if(curr > old) {
-					 stk_table.rows[i].cells[3].innerHTML = '&uarr;' + Math.round((curr-old)*100)/100;
+	      else if(curr > old) {
+					 stk_table.rows[i].cells[2].innerHTML = curr;
+					 stk_table.rows[i].cells[3].innerHTML = '&uarr; ' + Math.round((curr-old)*100)/100;
 					 stk_table.rows[i].cells[3].style.background = '#47d147';
 					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
 	      }
