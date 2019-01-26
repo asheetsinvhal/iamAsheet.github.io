@@ -71,7 +71,8 @@ function makeApiCall() { //Google sheets api
 
 
 loadStockTable = function() {
-	  tableData = document.getElementById('stockTable');
+	  tableData = document.getElementById('stockTable').value;
+	  resetTable(tableData);
     var stock_count = 1; 
 	  var country_name1 = document.getElementById('country_name1').value;
 	  var country_name2 = document.getElementById('country_name2').value;
@@ -126,13 +127,11 @@ loadStockTable = function() {
 	  xhttp.open("GET", "last", true);
 	  xhttp.send();
 	}
-	function reset() {
-	 main_body_childer = document.getElementById('main-body').children;
-	 for(j in main_body_childer) {
-	  main_body_childer[j].style.background = 'inherit';
-	  main_body_childer[j].style.color = 'black';
-	  main_body_childer[j].children[2].innerHTML = '';
-	 }
+	function resetTable(tableData) {
+		 var rowCount = tableData.rows.length;
+        for (var i = rowCount - 1; i > 0; i--) {
+            tableData.deleteRow(i);
+     }
 	}
 	function updateCountryData(country) {
 	 var xhttp = new XMLHttpRequest();
