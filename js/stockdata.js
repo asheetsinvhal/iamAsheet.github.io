@@ -77,7 +77,7 @@ function makeApiCall() { //Google sheets api
 }
 
 loadStockTable1 = function() {
-		clearInterval(refreshIntervalId);
+		clearInterval(refreshIntervalId1);
 	  tableData1 = document.getElementById('stockTable1').getElementsByTagName('tbody')[0];
 	  resetTable(tableData1);
     var stock_count_t1 = 0; 
@@ -102,15 +102,15 @@ loadStockTable1 = function() {
     }
 	  if(stock_count_t1 == 5){
 			   //updatePriceRun = 1;
-			   refreshIntervalId = setInterval(updatePriceData1, 8000);
+			   refreshIntervalId1 = setInterval(updatePriceData1, 8000);
 		}else {
-			   clearInterval(refreshIntervalId); 
+			   clearInterval(refreshIntervalId1); 
 		}
 
 }
 
 loadStockTable2 = function() {
-		clearInterval(refreshIntervalId);
+		clearInterval(refreshIntervalId2);
 	  tableData2 = document.getElementById('stockTable2').getElementsByTagName('tbody')[0];
 	  resetTable(tableData2);
     var stock_count_t2 = 0; 
@@ -135,9 +135,9 @@ loadStockTable2 = function() {
     }
 	  if(stock_count_t2 == 5){
 			   //updatePriceRun = 1;
-			   refreshIntervalId = setInterval(updatePriceData2, 8000);
+			   refreshIntervalId2 = setInterval(updatePriceData2, 8000);
 		}else {
-			   clearInterval(refreshIntervalId); 
+			   clearInterval(refreshIntervalId2); 
 		}
 
 }
