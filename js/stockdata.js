@@ -46,7 +46,7 @@ function makeApiCall() { //Google sheets api
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        ranges: ['Stock_Names', 'Stock_Prices'],   
+        ranges: ['Stock_Prices'],   
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -59,14 +59,14 @@ function makeApiCall() { //Google sheets api
         dateTimeRenderOption: 'FORMATTED_STRING', // TODO: Update placeholder value.
     };
 
-    var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
+    var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
     request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
         if (response.status == 200) {
             var all_data = response.result;
-            country = all_data.valueRanges[0].values;
-            stocks_data = all_data.valueRanges[1].values;
+            stocks_data = all_data.valueRanges[0].values;
+	    			loadStockTable();
         }
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
@@ -75,7 +75,8 @@ function makeApiCall() { //Google sheets api
 
 var tableData = document.getElementById('stockTable');
 var cell1, cell2, cell3, cell4;
-getStockPrices = function() {
+
+loadStockTable = function() {
     var stock_count = 0; //validate country
 	  var country_name1 = "India";//document.getElementById('country-1')
 		var country_name2 ="";//document.getElementById('country-2')
