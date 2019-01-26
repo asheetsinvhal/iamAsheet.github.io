@@ -99,7 +99,7 @@ loadStockTable = function() {
     }
 	  if( updatePriceRun == 0){
 			   updatePriceRun = 1;
-			   setInterval(updatePriceData, 7000);
+			   setInterval(updatePriceData, 5200);
 		}
 }
 
@@ -120,7 +120,7 @@ loadStockTable = function() {
 	function resetTable(tableData) {
 		if( tableData.rows){
 			 var rowCount = tableData.rows.length;
-			 for (var i = rowCount; i > 0; i--) {
+			 for (var i = 0; i < rowCount; i+=1) {
 					tableData.deleteRow(i);
 			 }
 		}else{
