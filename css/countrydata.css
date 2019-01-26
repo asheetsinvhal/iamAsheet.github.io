@@ -31,13 +31,19 @@ body {
  color: white;
  border: none;
 }
-.country-button:hover {
- background: #0095ff;
+select {
+ font-family: inherit;
+ font-weight: 40;
+ background: inherit;
+ border: none;
+ border-bottom: 1px solid white;
+ color: white;
+ font-size: 28px;
+ outline: none;
+ margin-bottom: 12px;
 }
-#main-body {
- display: table;
- margin: 0px auto;
-}
+
+
 .mb-row {
  display: table-row;
 }
