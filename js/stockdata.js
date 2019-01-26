@@ -61,6 +61,7 @@ function makeApiCall() { //Google sheets api
 
     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
     request.then(function(response) {
+	   console.log( response.result);
         if (response.status == 200) {
             var all_data = response.result;
             stocks_data = all_data.valueRanges[0].values;
