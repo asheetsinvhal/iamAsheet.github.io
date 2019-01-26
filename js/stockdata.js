@@ -1,7 +1,7 @@
 /* Stock table data that shows price changes*/
 
-var old_data = [0];
-var new_data = [0];
+var old_cmp_list = [0];
+var new_cmp_list = [0];
 //var last_refresh = 'NEVER';
 var country_name1;
 var country_name2;
@@ -131,14 +131,15 @@ loadStockTable = function() {
 	function updatePriceData() {
 		  var stk_table = document.getElementById('stockTable');
 			for (var r = 1, n = stk_table.rows.length; r < n; r+=1) {
-						old_data.push(stk_table.rows[r].cells[2].innerHTML);
+						var old_cmp= Math.round(parseFloat(stk_table.rows[r].cells[2].innerHTML) * 100)/100;
+						old_cmp_list.push(old_cmp);
 			}
 			
 		  makeApiCall();
 		  for(var j = 1; j < stocks_data.length; j += 1){
 				 if(stocks_data[j][10] == country_name1 || stocks_data[j][10] == country_name2 ){
 					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
-				 			new_data.push(new_cmp);
+				 			new_cmp_list.push(new_cmp);
 				 }
 		  }
 	    for(var i=1; i<new_data.length; i+=1 ) {
@@ -155,5 +156,6 @@ loadStockTable = function() {
 					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
 	      }
 	    }
-	    //old_data = new_data;
+	    old_cmp_list = [0];
+			new_cmp_list = [0];
 	}
