@@ -99,7 +99,7 @@ loadStockTable = function() {
     }
 	  if( updatePriceRun == 0){
 			   updatePriceRun = 1;
-			   setInterval(updatePriceData, 5200);
+			   setInterval(updatePriceData, 6200);
 		}
 }
 
@@ -153,12 +153,16 @@ loadStockTable = function() {
 					 stk_table.rows[i].cells[3].innerHTML = '&darr; ' + Math.round((old-curr)*100)/100;
 					 stk_table.rows[i].cells[3].style.background = '#e63900';
 					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
+					 stk_table.rows[i].cells[3].style.background = '#323C50';
+					 stk_table.rows[i].cells[3].style.color = '#e63900';
 	      }
 	      else if(curr > old) {
 					 stk_table.rows[i].cells[2].innerHTML = curr;
 					 stk_table.rows[i].cells[3].innerHTML = '&uarr; ' + Math.round((curr-old)*100)/100;
 					 stk_table.rows[i].cells[3].style.background = '#47d147';
 					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
+					 stk_table.rows[i].cells[3].style.background = '#323C50';
+					 stk_table.rows[i].cells[3].style.color = '#47d147';
 	      }
 	    }
 	    old_cmp_list = [0];
