@@ -52,7 +52,7 @@ function makeApiCall() { //Google sheets api
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
         valueRenderOption: 'UNFORMATTED_VALUE', // TODO: Update placeholder value.
 
-        majorDimension: 'COLUMNS', // TODO: Update placeholder value.
+        majorDimension: 'ROWS', // TODO: Update placeholder value.
     };
 
     var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
