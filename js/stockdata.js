@@ -1,3 +1,4 @@
+/* Stock table data that shows price changes*/
 
 var old_data = [0];
 var new_data = [0];
@@ -125,7 +126,7 @@ loadStockTable = function() {
 	function updatePriceData() {
 		  var stk_table = document.getElementById('stockTable');
 			for (var r = 1, n = stk_table.rows.length; r < n; r+=1) {
-							old_data.push(stk_table.rows[r].cells[2].innerHTML);
+						old_data.push(stk_table.rows[r].cells[2].innerHTML);
 			}
 			
 		  makeApiCall();
@@ -133,27 +134,21 @@ loadStockTable = function() {
 				 if(stocks_data[j][10] == country_name1 || stocks_data[j][10] == country_name2 ){
 					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
 				 			new_data.push(new_cmp);
-			}
+				 }
 		  }
 	    for(var i=1; i<new_data.length; i+=1 ) {
-	      curr = new_data[i];
-	      old  = old_data[i];
+	      var curr = new_data[i];
+	      var old  = old_data[i];
 	      if(curr < old) {
-					 stk_table.rows[i].cells[3].innerHTML = '-' + Math.round((old-curr)*100)/100;
-					 stk_table.rows[i].cells[3].innerHTML = Math.round((new_data[i][1])*100)/100;
-					 stk_table.rows[i].cells[3].style.background = 'red';
-					 stk_table.rows[i].cells[3].style.color = 'white';
+					 stk_table.rows[i].cells[3].innerHTML = '&darr;' + Math.round((old-curr)*100)/100;
+					 stk_table.rows[i].cells[3].style.background = '#e63900';
+					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
 	      }
 	      if(curr > old) {
-					 stk_table.rows[i].cells[3].innerHTML = '+' + Math.round((curr-old)*100)/100;
-					 stk_table.rows[i].cells[3].innerHTML = Math.round((new_data[i][1])*100)/100;
-					 stk_table.rows[i].cells[3].style.background = '#00ff4e';
-					 stk_table.rows[i].cells[3].style.color = 'white';
+					 stk_table.rows[i].cells[3].innerHTML = '&uarr;' + Math.round((curr-old)*100)/100;
+					 stk_table.rows[i].cells[3].style.background = '#47d147';
+					 stk_table.rows[i].cells[3].style.color = '#f0f0f5';
 	      }
 	    }
 	    //old_data = new_data;
-	   
 	}
-	  /*xhttp.open("GET", "data?country="+country, true);
-	  xhttp.send();*/
-	
