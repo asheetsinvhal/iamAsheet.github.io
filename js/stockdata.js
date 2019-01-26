@@ -1,11 +1,13 @@
 
-var old_data = [];
-var new_data = [];
+var old_data = [0];
+var new_data = [0];
 var last_refresh = 'NEVER';
-var country;
+var country_name1;
+var country_name2;
 var stocks_data; 
 var tableData;
 var cell1, cell2, cell3, cell4;
+var updatePriceRun = 0;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
@@ -58,8 +60,6 @@ function makeApiCall() { //Google sheets api
 
     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
     request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result);
         if (response.status == 200) {
             var all_data = response.result;
             stocks_data = all_data.valueRanges[0].values;
@@ -71,22 +71,22 @@ function makeApiCall() { //Google sheets api
 
 
 loadStockTable = function() {
-	  tableData = document.getElementById('stockTable');
+	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody');
 	  resetTable(tableData);
     var stock_count = 1; 
-	  var country_name1 = document.getElementById('country_name1').value;
-	  var country_name2 = document.getElementById('country_name2').value;
+	  country_name1 = document.getElementById('country_name1').value;
+	  country_name2 = document.getElementById('country_name2').value;
     for (var k = 1; k < stocks_data.length; k += 1) {
 				if(stocks_data[k][10] == country_name1 || stocks_data[k][10] == country_name2 ){
 								var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
 								//main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
 								var row = tableData.insertRow(stock_count);
 								cell1 = row.insertCell(0);
+								cell1.innerHTML = stocks_data[k][0];
 								cell2 = row.insertCell(1);
+								cell2.innerHTML = stocks_data[k][1];
 								cell3 = row.insertCell(2);
 								cell4 = row.insertCell(3);
-								cell1.innerHTML = stocks_data[k][0];
-								cell2.innerHTML = stocks_data[k][1];
 								cell3.innerHTML = cmp;
 								cell4.innerHTML = 0.00;
 								stock_count += 1;
@@ -95,6 +95,10 @@ loadStockTable = function() {
 					break;
 				}
     }
+	  if( updatePriceRun == 0){
+			   updatePriceRun = 1;
+			   setInterval(updatePriceData, 10000);
+		}
 }
 
 	function checkLastUpdate(country) {
@@ -110,41 +114,45 @@ loadStockTable = function() {
 	  xhttp.open("GET", "last", true);
 	  xhttp.send();
 	}
+
 	function resetTable(tableData) {
 		 var rowCount = tableData.rows.length;
         for (var i = rowCount - 1; i > 0; i--) {
             tableData.deleteRow(i);
      }
 	}
-	function updateCountryData(country) {
-	 var xhttp = new XMLHttpRequest();
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	    new_data = JSON.parse(this.responseText);
-	    main_body_childer = document.getElementById('main-body').children;
-	    for(i in new_data) {
-	      curr = new_data[i][1];
-	      old  = old_data[i][1];
+
+	function updatePriceData() {
+		  var stk_table = document.getElementById('stockTable');
+			for (var r = 1, n = stk_table.rows.length; r < n; r+=1) {
+							old_data.push(stk_table.rows[r].cells[2].innerHTML);
+					}
+			}
+		  makeApiCall();
+		  for(var j = 1; j < stocks_data.length; j += 1){
+				 if(stocks_data[j][10] == country_name1 || stocks_data[j][10] == country_name2 ){
+					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
+				 			new_data.push(new_cmp);
+			}
+	    for(var i=1; i<new_data.length; i+=1 ) {
+	      curr = new_data[i];
+	      old  = old_data[i];
 	      if(curr < old) {
-	       main_body_childer[i].children[2].innerHTML = '-' + Math.round((old-curr)*100)/100;
-	       main_body_childer[i].children[1].innerHTML = Math.round((new_data[i][1])*100)/100;
-	       main_body_childer[i].style.background = 'red';
-	       main_body_childer[i].style.color = 'white';
-	       ele = main_body_childer[i];
-	       setTimeout(function(){reset();}, 1000*5);
+					 stk_table.rows[i].cells[3].innerHTML = '-' + Math.round((old-curr)*100)/100;
+					 stk_table.rows[i].cells[3].innerHTML = Math.round((new_data[i][1])*100)/100;
+					 stk_table.rows[i].cells[3].style.background = 'red';
+					 stk_table.rows[i].cells[3].style.color = 'white';
 	      }
 	      if(curr > old) {
-	       main_body_childer[i].children[2].innerHTML = '+' + Math.round((curr-old)*100)/100;
-	       main_body_childer[i].children[1].innerHTML = Math.round((new_data[i][1])*100)/100;
-	       main_body_childer[i].style.background = '#00ff4e';
-	       main_body_childer[i].style.color = 'white';
-	       ele = main_body_childer[i];
-	       setTimeout(function(){reset();}, 1000*5);
+					 stk_table.rows[i].cells[3].innerHTML = '+' + Math.round((curr-old)*100)/100;
+					 stk_table.rows[i].cells[3].innerHTML = Math.round((new_data[i][1])*100)/100;
+					 stk_table.rows[i].cells[3].style.background = '#00ff4e';
+					 stk_table.rows[i].cells[3].style.color = 'white';
 	      }
 	    }
-	    old_data = new_data;
+	    //old_data = new_data;
 	   }
 	  };
-	  xhttp.open("GET", "data?country="+country, true);
-	  xhttp.send();
+	  /*xhttp.open("GET", "data?country="+country, true);
+	  xhttp.send();*/
 	}
