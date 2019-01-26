@@ -63,7 +63,6 @@ function makeApiCall() { //Google sheets api
         if (response.status == 200) {
             var all_data = response.result;
             stocks_data = all_data.valueRanges[0].values;
-	          loadStockTable();
         }
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
@@ -71,30 +70,29 @@ function makeApiCall() { //Google sheets api
 }
 
 
-
 loadStockTable = function() {
 	  tableData = document.getElementById('stockTable');
     var stock_count = 1; 
-	  var country_name1 = "India";//document.getElementById('country-1')
-		var country_name2 ="";//document.getElementById('country-2')
+	  var country_name1 = document.getElementById('country_name1');
+	  var country_name2 = document.getElementById('country_name2');
     for (var k = 1; k < stocks_data.length; k += 1) {
-			if(stocks_data[k][10] == country_name1 || stocks_data[k][10] == country_name2 ){
-							var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
-							//main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
-							var row = tableData.insertRow(stock_count);
-							cell1 = row.insertCell(0);
-							cell2 = row.insertCell(1);
-							cell3 = row.insertCell(2);
-							cell4 = row.insertCell(3);
-							cell1.innerHTML = stocks_data[k][0];
-							cell2.innerHTML = stocks_data[k][1];
-							cell3.innerHTML = cmp;
-							cell4.innerHTML = 0.00;
-							stock_count += 1;
-			}
-	    if( stock_count == 10){
-				break;
-			}
+				if(stocks_data[k][10] == country_name1 || stocks_data[k][10] == country_name2 ){
+								var cmp = Math.round(parseFloat(stocks_data[k][6]) * 100) / 100;
+								//main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
+								var row = tableData.insertRow(stock_count);
+								cell1 = row.insertCell(0);
+								cell2 = row.insertCell(1);
+								cell3 = row.insertCell(2);
+								cell4 = row.insertCell(3);
+								cell1.innerHTML = stocks_data[k][0];
+								cell2.innerHTML = stocks_data[k][1];
+								cell3.innerHTML = cmp;
+								cell4.innerHTML = 0.00;
+								stock_count += 1;
+				}
+				if( stock_count == 10){
+					break;
+				}
     }
     //showPort();
 }
