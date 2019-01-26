@@ -97,10 +97,10 @@ loadStockTable = function() {
 					break;
 				}
     }
-	  /*if( updatePriceRun == 0){
+	  if( updatePriceRun == 0){
 			   updatePriceRun = 1;
 			   setInterval(updatePriceData, 10000);
-		}*/
+		}
 }
 
 /*	function checkLastUpdate(country) {
