@@ -1,9 +1,11 @@
 
-	var old_data = [];
-	var new_data = [];
-	var last_refresh = 'NEVER';
-	var country;
-        var stocks_data; 
+var old_data = [];
+var new_data = [];
+var last_refresh = 'NEVER';
+var country;
+var stocks_data; 
+var tableData;
+var cell1, cell2, cell3, cell4;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
@@ -68,10 +70,10 @@ function makeApiCall() { //Google sheets api
     });
 }
 
-var tableData = document.getElementById('stockTable');
-var cell1, cell2, cell3, cell4;
+
 
 loadStockTable = function() {
+	  tableData = document.getElementById('stockTable');
     var stock_count = 0; //validate country
 	  var country_name1 = "India";//document.getElementById('country-1')
 		var country_name2 ="";//document.getElementById('country-2')
