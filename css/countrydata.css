@@ -31,7 +31,7 @@ body {
 select {
  font-family: inherit;
  font-weight: 40;
- background: inherit;
+ background: #333333;
  border: none;
  border-bottom: 1px solid white;
  color: white;
