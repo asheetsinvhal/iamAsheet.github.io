@@ -75,7 +75,7 @@ function makeApiCall() { //Google sheets api
 loadStockTable = function() {
 	  tableData = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
 	  resetTable(tableData);
-    var stock_count = 1; 
+    var stock_count = 0; 
 	  country_name1 = document.getElementById('country_name1').value;
 	  country_name2 = document.getElementById('country_name2').value;
     for (var k = 1; k < stocks_data.length; k += 1) {
@@ -93,7 +93,7 @@ loadStockTable = function() {
 								cell4.innerHTML = 0.00;
 								stock_count += 1;
 				}
-				if( stock_count == 10){
+				if( stock_count == 9){
 					break;
 				}
     }
