@@ -194,7 +194,7 @@ function hidePort() {
     document.getElementById('portfolio-popup')
         .style.display = 'none';
 }
-
+/*
 function refreshTeamData() { //write to sheets api
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -204,7 +204,7 @@ function refreshTeamData() { //write to sheets api
     }
     xhttp.open("GET", "/teamdata", true);
     xhttp.send();
-}
+}*/
 
 
 function updateMarketPrice() { //Google sheets api
@@ -317,8 +317,9 @@ stock_action = function(buttonId) {
     request.then(function(response) {
             if (response.status == 200) {
                 showNotif(buttonId + ' ORDER SUCCESFUL');
-		makeApiCall();    
-                setTimeout( putCountryData, 1000);
+								makeApiCall();
+							  putCountryData();
+                //setTimeout( putCountryData, 1000);
             } else {
                 showNotif('! TRY AGAIN !');
                 //setTimeout(function() {
@@ -327,7 +328,7 @@ stock_action = function(buttonId) {
                 //  hidePort()}, 2000);
             }
             showPort();
-	    document.getElementById('country_name').value = '';
+	    			document.getElementById('country_name').value = '';
             document.getElementById('main').value = -1;
             document.getElementById('quantity').setAttribute('placeholder', '');
             document.getElementById('quantity').value = '';
@@ -339,8 +340,7 @@ stock_action = function(buttonId) {
 }
 
 function showNotif(text, background = "white", color = "black") {
-    if (document.getElementById('notif')
-        .style.display == 'block') {
+    if (document.getElementById('notif').style.display == 'block') {
         setTimeout(function() {
             showNotif(text, background)
         }, 2000);
@@ -351,7 +351,7 @@ function showNotif(text, background = "white", color = "black") {
         document.getElementById('notif').style.color = color;
         setTimeout(function() {
             document.getElementById('notif').style.display = 'none'
-        }, 2100);
+        }, 1800);
     }
 }
 
