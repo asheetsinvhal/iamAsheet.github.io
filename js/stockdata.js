@@ -141,8 +141,11 @@ loadStockTable = function() {
 					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
 				 			new_cmp_list.push(new_cmp);
 				 }
+				 if( new_cmp_list.length == 10){
+				 		break;
+				 }
 		  }
-	    for(var i=1; i<new_data.length; i+=1 ) {
+	    for(var i=1; i<new_cmp_list.length; i+=1 ) {
 	      var curr = new_data[i];
 	      var old  = old_data[i];
 	      if(curr < old) {
