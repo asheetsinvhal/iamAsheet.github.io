@@ -46,16 +46,15 @@ function makeApiCall() { //Google sheets api
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        range: 'Stock_Prices',   
+        ranges: ['Stock_Prices'],   
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
         valueRenderOption: 'UNFORMATTED_VALUE', // TODO: Update placeholder value.
 
-        majorDimension: 'ROWS', // TODO: Update placeholder value.
     };
 
-    var request = gapi.client.sheets.spreadsheets.values.get(params); // to read data
+    var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
     request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
