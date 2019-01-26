@@ -71,7 +71,7 @@ function makeApiCall() { //Google sheets api
 
 
 loadStockTable = function() {
-	  tableData = document.getElementById('stockTable').value;
+	  tableData = document.getElementById('stockTable');
 	  resetTable(tableData);
     var stock_count = 1; 
 	  var country_name1 = document.getElementById('country_name1').value;
@@ -95,25 +95,8 @@ loadStockTable = function() {
 					break;
 				}
     }
-    //showPort();
 }
-	/*function fetchCountryData(country) {
-	 document.getElementById('overlap-1').style.display = 'none';
-	 var xhttp = new XMLHttpRequest();
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	    old_data = JSON.parse(this.responseText);
-	    main_body = document.getElementById('main-body');
-	    console.log(old_data);
-	    for(i in old_data) {
-	     main_body.innerHTML += '<div class="mb-row"><div class="mb-col1">' + old_data[i][0].toUpperCase() + '</div><div class="mb-col2">' + Math.round((old_data[i][1])*100)/100  + '</div><div class="mb-col3"></div></div>';
-	    }
-	    setInterval(function(){checkLastUpdate(country)}, 1000*20);
-	   }
-	  };
-	  xhttp.open("GET", "data?country="+country, true);
-	  xhttp.send();
-	}*/
+
 	function checkLastUpdate(country) {
 	 var xhttp = new XMLHttpRequest();
 	 xhttp.onreadystatechange = function() {
