@@ -21,7 +21,7 @@ body {
 
 h1 {
   font-size:2em; 
-  font-weight: 5000;
+  font-weight: 1000;
   line-height:1em;
   text-align: center;
   color: #f000ff;
@@ -46,24 +46,19 @@ h2 a {
 
 
 
-.container1 th h1 {
+.container1 th h1, .container2 th h1 {
 	 font-weight: bold;
-	 font-size: 1.5em;
+	 font-size: 18px;
    text-align: centre;
    color: #185875;
 }
 
-.container2 th h1 {
-	 font-weight: bold;
-	 font-size: 1.5em;
-   text-align: centre;
-   color: #185875;
-}
 .container1 td, .container2 td  {
 	  font-family: 'Open Sans', sans-serif;
 	  font-variant-numeric: slashed-zero;
 	  font-weight: bold;
-	  font-size: 7px;
+	  font-size: 14px;
+	  color: #f2f2f2;
     -webkit-box-shadow: 0 2px 2px -2px #0E1119;
 	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
 	  box-shadow: 0 2px 2px -2px #0E1119;
