@@ -52,6 +52,9 @@ select {
    text-align: centre;
    color: #185875;
 }
+.container1 th {
+	  background-color: #ffffaa;
+}
 
 .container1 td {
 	  font-family: 'Open Sans', sans-serif;
@@ -67,8 +70,9 @@ select {
 	  overflow: hidden;
 	  width: 80%;
 	  margin: 0 auto;
-    display: table;
-    padding: 0 0 0 0;
+	  table-layout: fixed;
+    	  display: table;
+   	  padding: 0 0 0 0;
 }
 
 .container1 td {
@@ -79,10 +83,6 @@ select {
 	  padding-right:5px;
 	  background-color: #323C50;
 }
-.container1 th {
-	  background-color: #ffffaa;
-}
 
-.container1 td:first-child { color: #FB667A; }
-.container1 td:nth-of-type(1) {width:20px;}
+
 
