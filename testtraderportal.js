@@ -112,21 +112,15 @@ function makeApiCall() { //Google sheets api
         //ranges: ['Stock_Names','Stock_Prices','PortfolioR2','TeamScoresR2'],  // For ROund2
         //ranges: ['Stock_Names','Stock_Prices','PortfolioR3','TeamScoresR3'],  // For ROund3    
 
-        // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
         valueRenderOption: 'UNFORMATTED_VALUE', // TODO: Update placeholder value.
-
-        // How dates, times, and durations should be represented in the output.
-        // This is ignored if value_render_option is
-        // FORMATTED_VALUE.
         // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
         dateTimeRenderOption: 'FORMATTED_STRING', // TODO: Update placeholder value.
     };
 
     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
-	return new Promise((resolve, reject) => {
+	  return new Promise((resolve, reject) => {
 		 request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
         console.log(response.result);
         if (response.status == 200) {
             var all_data = response.result;
@@ -138,33 +132,27 @@ function makeApiCall() { //Google sheets api
 			 resolve();
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
-			 reject();
+				reject();
     });
 	});
 }
 
-putTeamData = function() { //ELIMINATE
+putTeamData = function() { 
     hidePort();
 };
 
 putCountryData = function() { //change to putTeamData
-    team_id = document.getElementById('team_id')
-        .value;
-    country_name = document.getElementById('country_name')
-        .value;
+    team_id = document.getElementById('team_id').value;
+    country_name = document.getElementById('country_name').value;
     // Team name  & Balance 
-    document.getElementById('team_name')
-        .innerHTML = team_data[team_id][1];
-    document.getElementById('team_balance')
-        .innerHTML = Math.round(team_data[team_id][8] * 100) / 100;
-
+    document.getElementById('team_name').innerHTML = team_data[team_id][1];
+    document.getElementById('team_balance').innerHTML = Math.round(team_data[team_id][8] * 100) / 100;
     main_content = document.getElementById('main');
     main_content.innerHTML = '<option>-</option>';
     for (var i in country_data[country_name]) {
         main_content.innerHTML += '<option>' + country_data[country_name][i] + '</option>';
     }
-    team_id = document.getElementById('team_id')
-        .value;
+    team_id = document.getElementById('team_id').value;
     if (team_id != -1 && country_name != -1) {
         getPortfolio();
     }
@@ -270,32 +258,32 @@ function updateMarketPrice() { //Google sheets api
 	    // do something
 	  );
 	})*/
+
 stock_action = async function(buttonId) {
-    var teamId = document.getElementById('team_id')
-        .value;
-    var country = document.getElementById('country_name')
-        .value;
-    var stockId = document.getElementById('main')
-        .value; //main-> stock ID
-    var qty = document.getElementById('quantity')
-        .value;
-    var price = document.getElementById('price')
-        .value;
+    var teamId = document.getElementById('team_id').value;
+    var country = document.getElementById('country_name').value;
+    var stockId = document.getElementById('main').value; //main-> stock ID
+    var qty = document.getElementById('quantity').value;
+    var price = document.getElementById('price').value;
     if (teamId == "-1" || country == "-1" || stockId == "" || qty == "" || price == "") {
         showNotif('	DATA MISSING!');
         return;
     }
-    showNotif('PLACING ' + buttonId + ' ORDER');
+    /*if((buttonId == "BUY" && parseFloat(price) < stk_price) || (buttonId == "SELL" && parseFloat(price) < stk_price)){
+			 return;
+		}*/
     if (parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt) {
         showNotif('PRICE EXCEEDS ±20% !');
         return;
     }
-
+		showNotif('PLACING ' + buttonId + ' ORDER');
     var params = {
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        range: 'TestUIn1!A2', // TODO: Update placeholder value.
+        range: 'TestUIn1!A2', // CHANGE EVERY ROUND
+			  // range: 'TestUIn2!A2'
+			  //  range: 'TestUIn3!A2'
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED', // TODO: Update placeholder value.
     };
@@ -321,32 +309,19 @@ stock_action = async function(buttonId) {
     await request.then(async function(response) {
             if (response.status == 200) {
                 showNotif(buttonId + ' ORDER SUCCESFUL');
-						
 								await makeApiCall()
 							  await putCountryData();
-							 await showPort();
-	    			document.getElementById('country_name').value = '';
-            document.getElementById('main').value = -1;
-            document.getElementById('quantity').setAttribute('placeholder', '');
-            document.getElementById('quantity').value = '';
-            document.getElementById('team_id').value = '';
-            document.getElementById('price').value = '';
-                //setTimeout( putCountryData, 1000);
+							  //await showPort();
             } else {
                 showNotif('! TRY AGAIN !');
-                //setTimeout(function() {
-                // document.getElementById('team_name').innerHTML = '';
-                // document.getElementById('team_balance').innerHTML = '';
-                //  hidePort()}, 2000);
-							 showPort();
-	    			document.getElementById('country_name').value = '';
+							  showPort();
+            }
+            document.getElementById('country_name').value = '';
             document.getElementById('main').value = -1;
             document.getElementById('quantity').setAttribute('placeholder', '');
             document.getElementById('quantity').value = '';
             document.getElementById('team_id').value = '';
             document.getElementById('price').value = '';
-            }
-           
         }, function(reason) {
             console.error('error: ' + reason.result.error.message);
         });
@@ -365,18 +340,6 @@ function showNotif(text, background = "white", color = "black") {
         document.getElementById('notif').style.color = color;
         setTimeout(function() {
             document.getElementById('notif').style.display = 'none'
-        }, 1800);
+        }, 2000);
     }
 }
-
-/*var myVar = setInterval(myTimer, 1000);
-	
-	var $form = $('form#test-form'),
-      scriptURL = 'https://script.google.com/a/imi.edu/macros/s/AKfycbyAeh_5252xghfdNs1Je9MlLQ9OmiuKz-TUxO7fmzkjCAqJdha_/exec' //App script url
-	const form = document.forms['contact'] 
-	form.addEventListener('submit', e => {  
-	   e.preventDefault()  
-	   fetch(scriptURL, { method: 'POST', body: new FormData(form)})  
-	    .then(response => console.log('Success!', response))  
-	    .catch(error => console.error('Error!', error.message))  
-	 })  */
