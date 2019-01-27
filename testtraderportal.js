@@ -124,7 +124,8 @@ function makeApiCall() { //Google sheets api
     };
 
     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
-    request.then(function(response) {
+	return new Promise((resolve, reject) => {
+		 request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
         if (response.status == 200) {
@@ -134,9 +135,12 @@ function makeApiCall() { //Google sheets api
             portfolio_data = all_data.valueRanges[2].values;
             team_data = all_data.valueRanges[3].values;
         }
+			 resolve();
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
+			 reject();
     });
+	});
 }
 
 putTeamData = function() { //ELIMINATE
@@ -317,8 +321,9 @@ stock_action = function(buttonId) {
     request.then(function(response) {
             if (response.status == 200) {
                 showNotif(buttonId + ' ORDER SUCCESFUL');
-								makeApiCall();
-							  putCountryData();
+						
+								makeApiCall().then(putCountryData);
+							
                 //setTimeout( putCountryData, 1000);
             } else {
                 showNotif('! TRY AGAIN !');
@@ -337,6 +342,7 @@ stock_action = function(buttonId) {
         }, function(reason) {
             console.error('error: ' + reason.result.error.message);
         });
+	
 }
 
 function showNotif(text, background = "white", color = "black") {
