@@ -1,7 +1,7 @@
 /**
- * TEST file for Trader
+ * Trading portal for Round 1
  */
-//var team_data = {"1": ["Affluentia", 19909.610000000033], "2": ["Sparrow", 50000.0], "3": ["Valu-ed", 606212.3499999999], "4": ["The Brainaics", 392853.30000000005], "5": ["Addicts", 1327163.0], "6": ["Enigma", 632385.9000000001], "7": ["Think Big", 671726.9], "8": ["White collar crew", 132343.3], "9": ["Revolution", 832237.5], "10": ["Bright sparks", 262476.19999999995], "11": ["Fingeeks", 500593.5], "12": ["wizards", 374245.86], "13": ["Midnight warriors", 1844.6600000000326], "14": ["Achievers", 18007.300000000047], "15": ["Backbencher", 39599.39999999998], "16": ["Super Saiyan", 692623.6]};
+
 var shares_data = [
     ["AUSTRALIA", "ANZ Group", "ANZ Group", 531.5024121295662, 1509],
     ["JAPAN", "Aerozone", "Aerozone", 2615.0, 2280],
