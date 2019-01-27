@@ -114,7 +114,7 @@ function getTeamData() { //Google sheets api
     function resetTable(tableData) {
       if( tableData.rows){
          var rowCount = tableData.rows.length;
-         for (var i = 0; i < rowCount; i+=1) {
+         for (var i = rowCount; i > -1; i-=1) {
             tableData.deleteRow(i);
          }
       }else{
