@@ -16,7 +16,18 @@
 	</head>
 	<body  onload="handleSignInClick()">
 		<p class="big-title">TEAM SCORES</p>
-				 <table class="container1" id="stockTable1">
+				 <div id='country-select-holder' style="display: inline-block;">
+						<label style="margin-left:20px;">ROUND :
+							 <select id="round" name="country_name1" onchange="loadTeamData();">
+										<option value=-1>-</option>
+										<option>1</option>   
+										<option>2</option>
+										<option>3</option>
+								    <option>4</option>
+								</select>
+						</label>
+				</div>
+				 <table class="container" id="scoreTable">
 						<thead>
 								<tr>
 									<th><h1>Team Number</h1></th>
