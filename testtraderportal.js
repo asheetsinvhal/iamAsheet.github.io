@@ -270,7 +270,7 @@ function updateMarketPrice() { //Google sheets api
 	    // do something
 	  );
 	})*/
-stock_action = function(buttonId) {
+stock_action = async function(buttonId) {
     var teamId = document.getElementById('team_id')
         .value;
     var country = document.getElementById('country_name')
@@ -318,12 +318,19 @@ stock_action = function(buttonId) {
     }
 
     var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
-    request.then(function(response) {
+    await request.then(async function(response) {
             if (response.status == 200) {
                 showNotif(buttonId + ' ORDER SUCCESFUL');
 						
-								makeApiCall().then(putCountryData);
-							
+								await makeApiCall()
+							  await putCountryData();
+							 await showPort();
+	    			document.getElementById('country_name').value = '';
+            document.getElementById('main').value = -1;
+            document.getElementById('quantity').setAttribute('placeholder', '');
+            document.getElementById('quantity').value = '';
+            document.getElementById('team_id').value = '';
+            document.getElementById('price').value = '';
                 //setTimeout( putCountryData, 1000);
             } else {
                 showNotif('! TRY AGAIN !');
@@ -331,14 +338,15 @@ stock_action = function(buttonId) {
                 // document.getElementById('team_name').innerHTML = '';
                 // document.getElementById('team_balance').innerHTML = '';
                 //  hidePort()}, 2000);
-            }
-            showPort();
+							 showPort();
 	    			document.getElementById('country_name').value = '';
             document.getElementById('main').value = -1;
             document.getElementById('quantity').setAttribute('placeholder', '');
             document.getElementById('quantity').value = '';
             document.getElementById('team_id').value = '';
             document.getElementById('price').value = '';
+            }
+           
         }, function(reason) {
             console.error('error: ' + reason.result.error.message);
         });
