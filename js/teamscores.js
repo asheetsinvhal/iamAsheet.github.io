@@ -1,4 +1,9 @@
-var teams_data; 
+var teams_data1;
+var teams_data2;
+var teams_data3;
+var teams_data4;
+
+var teams_total;
 var tableData;
 var cell1, cell2, cell3;
 //var updatePriceRun = 0;
@@ -28,7 +33,7 @@ function handleClientLoad() {
 
 function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
-        makeApiCall();
+        getTeamData();
     }
 }
 
@@ -62,7 +67,6 @@ function getTeamData() { //Google sheets api
             teams_data2 = all_data.valueRanges[1].values;
             teams_data3 = all_data.valueRanges[2].values;
             teams_data4 = all_data.valueRanges[3].values;
-            loadTeamData();
         }
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
@@ -71,20 +75,30 @@ function getTeamData() { //Google sheets api
 
 loadTeamData = function() {
 	  tableData = document.getElementById('scoreTable').getElementsByTagName('tbody')[0];
+	  var teams_table_list= [];
 	  resetTable(tableData);
     var row_count = 0; 
-	  round = document.getElementById('round').value;
-    //switch()
-    for (var k = 1; k < teams_data.length; k += 1) {
-				if(stocks_data[k][10] == country_name1){
+	  var round = document.getElementById('round').value;
+    switch(round):
+			case "1":
+				teams_table_list = teams_data1;
+			case "2":
+				teams_table_list = teams_data2;
+			case "3":
+				teams_table_list = teams_data3;
+			case "4":
+				teams_table_list = teams_data4;
+			default:
+				return;
+    for (var k = 1; k < teams_table_list.length; k += 1) {
 								var row = tableData.insertRow(row_count);
 								cell1 = row.insertCell(0);
-								cell1.innerHTML = teams_data[k][0];
+								cell1.innerHTML = teams_table_list[k][0];
 								cell2 = row.insertCell(1);
-								cell2.innerHTML = teams_data[k][1];
+								cell2.innerHTML = teams_table_list[k][1];
 								cell3 = row.insertCell(2);
 								//cell4 = row.insertCell(3);
-								cell3.innerHTML = teams_data[k][1];
+								cell3.innerHTML = teams_table_list[k][2];
 								//cell4.innerHTML = 0.00;
 								row_count += 1;
 				}
