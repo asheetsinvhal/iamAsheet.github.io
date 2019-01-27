@@ -64,7 +64,6 @@ select {
 }
 
 .container1{
-	  text-align: left;
 	  overflow: hidden;
 	  width: 80%;
 	  margin: 0 auto;
@@ -85,4 +84,5 @@ select {
 }
 
 .container1 td:first-child { color: #FB667A; }
+.container1 td:nth-of-type(1) {width:20px;}
 
