@@ -18,67 +18,32 @@ button {
   -webkit-transition-duration: 0.6s; /* Safari */
   transition-duration: 0.6s;
 }
-button:hover {
-  background-color: white; 
-  color: black;
-}
+
 #main-body {
  display: inline-block;
  text-align: left;
  margin: 0px auto;
 }
 .big-title {
-  font-size: 40px;
+  font-family: 'Montserrat';
+  font-size: 35px;
   color: white;
   padding: 20px;
  }
-.mb-row {
- display: table-row;
- width: 600px;
-}
-.mb-col1,.mb-col2,.mb-col3 {
- display: table-cell;
- font-family: 'Montserrat';
- font-weight: 900;
- font-size: 22px;
- padding: 4px 10px;
-}
-.less-margin {
- margin-bottom: 4px;
-}
-#container {
- width: 300px;
- margin: 120px auto;
- text-align: left;
-}
-#container * {
- width:100%;
-}
-input {
+select {
  font-family: inherit;
- font-weight: 900;
- background: inherit;
+ font-weight: 40;
+ background: #333333;
  border: none;
  border-bottom: 1px solid white;
  color: white;
- font-size: 28px;
+ font-size: 14px;
  outline: none;
+ margin-bottom: 8px;
 }
-#passlap {
- position: fixed;
- top: 0px;
- left: 0px;
- background: rgba(3, 71, 119, 0.93);
- width: 100%;
- height: 100%;
- color: white;
+
+.less-margin {
+ margin-bottom: 4px;
 }
-#notif {
- width: 400px;
- padding: 20px 10px;
- color: black;
- position: fixed;
- bottom: 30px;
- right: 30px;
- display: none;
-}
+
+
