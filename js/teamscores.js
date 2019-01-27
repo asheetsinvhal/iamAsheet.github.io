@@ -72,22 +72,27 @@ function getTeamData() { //Google sheets api
 }
 
  function loadTeamData() {
+	  var round = document.getElementById('round').value;
 	  tableData = document.getElementById('scoreTable').getElementsByTagName('tbody')[0];
 	  var teams_table_list= [];
 	  resetTable(tableData);
     var row_count = 0; 
-	  var round = document.getElementById('round').value;
-    switch(round):
+    switch(round){
 			case "1":
 				teams_table_list = teams_data1;
+				break;
 			case "2":
 				teams_table_list = teams_data2;
+				break;
 			case "3":
 				teams_table_list = teams_data3;
+				break;
 			case "4":
 				teams_table_list = teams_data4;
+				break;
 			default:
 				return;
+		}
     for (var k = 1; k < teams_table_list.length; k += 1) {
 								var row = tableData.insertRow(row_count);
 								cell1 = row.insertCell(0);
