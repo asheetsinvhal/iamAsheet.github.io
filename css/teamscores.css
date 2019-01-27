@@ -1,29 +1,20 @@
 body {
- background: rgba(3, 71, 119, 0.93);
- text-align: center;
- color: white;
- font-family: 'Montserrat';
- font-weight: 900;
-}
-button {
-  color: white;
-  font-family: 'Montserrat';
-  font-weight: 900;
-  border: none;
-  width: 200px;
-  padding: 12px;
-  margin-bottom: 8px;
-  background: black;
-  border-radius: 6px;
-  -webkit-transition-duration: 0.6s; /* Safari */
-  transition-duration: 0.6s;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color:#A7A1AE;
+  background-color:#102030;
 }
 
-#main-body {
- display: inline-block;
- text-align: left;
- margin: 0px auto;
+h1 {
+  font-size:2em; 
+  font-weight: 1000;
+  line-height:1em;
+  text-align: center;
+  color: #f000ff;
 }
+
+
 .big-title {
   font-family: 'Montserrat';
   font-size: 35px;
