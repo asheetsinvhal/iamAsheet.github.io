@@ -5,9 +5,7 @@ var teams_data4;
 
 var teams_total;
 var tableData;
-var cell1, cell2, cell3;
-//var updatePriceRun = 0;
-var refreshIntervalId1 = 0;
+var cell1, cell2, cell3;;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
