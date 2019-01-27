@@ -36,12 +36,22 @@ select {
 .less-margin {
  margin-bottom: 4px;
 }
+.container1{
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+	  table-layout: fixed;
+    display: table;
+   	padding: 0 0 0 0;
+}
 
 .container1 th h1{
+	 font-family: inherit;
 	 font-weight: bold;
 	 font-size: 18px;
-   text-align: centre;
+   text-align: center;
    color: #185875;
+	 font-family: inherit;
 }
 .container1 th {
 	  background-color: #ffffaa;
@@ -57,14 +67,7 @@ select {
 	  box-shadow: 0 2px 2px -2px #fdeeee;
 }
 
-.container1{
-	  overflow: hidden;
-	  width: 80%;
-	  margin: 0 auto;
-	  table-layout: fixed;
-    	  display: table;
-   	  padding: 0 0 0 0;
-}
+
 
 .container1 td {
 	  text-align: center;
