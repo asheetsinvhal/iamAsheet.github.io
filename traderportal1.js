@@ -42,11 +42,11 @@ var shares_data = [
 var country_data = {
     "AUSTRALIA": ["ANZ", "BHP", "KAS", "KRMB", "TELS"],
     "ENGLAND": ["BCL", "BAR", "DAG", "TSCO", "VODA"],
-    "USA": ["APPL", "DRCO", "GOOG", "MSFT", "PLP"],
-    "INDIA": ["BHEL", "ICIC", "IDEA", "RIL", "SUN"],
-    "CHINA": ["ALI", "JIGZ", "SANG", "SOFT", "XOMI"],
-    "GERMANY": ["BMW", "CONT", "DESH", "SMNS", "VWG"],
-    "JAPAN": ["ARZ", "KMC", "NPPO", "SAM", "SONY"]
+    "USA": ["APPL", "TSLA", "GOOG", "MSFT", "NVDA"],
+    "INDIA": ["INFY", "SUNPHARMA", "YESBANK", "RIL", "EICHERMOT"],
+    "CHINA": ["ALI", "THL", "SHIC", "BYD", "XOMI"],
+    "GERMANY": ["TKA", "DBK", "SIEM", "CON", "BMW"],
+    "JAPAN": ["NPS", "KMC", "SMC", "SOFT", "SONY"]
 };
 
 var country;
