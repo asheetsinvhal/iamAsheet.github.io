@@ -1,8 +1,8 @@
 /* To display team scores*/
-var teams_data1;
-var teams_data2;
-var teams_data3;
-var teams_data4;
+var teams_data1 = [];
+var teams_data2 = [];
+var teams_data3 = [];
+var teams_data4 = [];
 
 var teams_total;
 var tableData;
