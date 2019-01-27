@@ -46,4 +46,43 @@ select {
  margin-bottom: 4px;
 }
 
+.container1 th h1{
+	 font-weight: bold;
+	 font-size: 18px;
+   text-align: centre;
+   color: #185875;
+}
+
+.container1 td {
+	  font-family: 'Open Sans', sans-serif;
+	  font-weight: bold;
+	  font-size: 14px;
+	  color: #f2f2f2;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	  box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container1{
+	  text-align: left;
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+    display: table;
+    padding: 0 0 0 0;
+}
+
+.container1 td {
+	  text-align: center;
+	  padding-bottom: 5px;
+	  padding-top: 5px;
+	  padding-left:5px;
+	  padding-right:5px;
+	  background-color: #323C50;
+}
+.container1 th {
+	  background-color: #ffffaa;
+}
+
+.container1 td:first-child { color: #FB667A; }
 
