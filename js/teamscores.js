@@ -71,7 +71,7 @@ function getTeamData() { //Google sheets api
     });
 }
 
-loadTeamData = function() {
+ function loadTeamData() {
 	  tableData = document.getElementById('scoreTable').getElementsByTagName('tbody')[0];
 	  var teams_table_list= [];
 	  resetTable(tableData);
@@ -106,7 +106,7 @@ loadTeamData = function() {
     }
    }
     
-    resetTable = function (tableData) {
+    function resetTable(tableData) {
       if( tableData.rows){
          var rowCount = tableData.rows.length;
          for (var i = 0; i < rowCount; i+=1) {
