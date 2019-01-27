@@ -1,3 +1,4 @@
+/* To display team scores*/
 var teams_data1;
 var teams_data2;
 var teams_data3;
@@ -5,7 +6,7 @@ var teams_data4;
 
 var teams_total;
 var tableData;
-var cell1, cell2, cell3;;
+var cell1, cell2, cell3;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
@@ -94,20 +95,19 @@ function getTeamData() { //Google sheets api
 				return;
 		}
     for (var k = 1; k < teams_table_list.length; k += 1) {
-								var row = tableData.insertRow(row_count);
-								cell1 = row.insertCell(0);
-								cell1.innerHTML = teams_table_list[k][0];
-								cell2 = row.insertCell(1);
-								cell2.innerHTML = teams_table_list[k][1];
-								cell3 = row.insertCell(2);
-								//cell4 = row.insertCell(3);
-								cell3.innerHTML = teams_table_list[k][2];
-								//cell4.innerHTML = 0.00;
-								row_count += 1;
-				}
-				if( row_count == 13){
-					break;
-				}
+        var row = tableData.insertRow(row_count);
+        cell1 = row.insertCell(0);
+        cell1.innerHTML = teams_table_list[k][0];
+        cell2 = row.insertCell(1);
+        cell2.innerHTML = teams_table_list[k][1];
+        cell3 = row.insertCell(2);
+        //cell4 = row.insertCell(3);
+        cell3.innerHTML = teams_table_list[k][2];
+        //cell4.innerHTML = 0.00;
+        row_count += 1;
+        if( row_count == 13){
+          break;
+        }
     }
    }
     
