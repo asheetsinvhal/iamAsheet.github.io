@@ -188,7 +188,7 @@ getPortfolio = function() {
     main_p = document.getElementById('main_p');
     main_p.innerHTML = '';
     main_p.innerHTML += '<div style="display: table">';
-    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;"> VALUE </div></div> '
+    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;"> VALUE </div></div> ';
     var stock_count = 0;
     for (var k = 1; k < portfolio_data.length; k += 1) {
         if (portfolio_data[k][0] == parseInt(team_id)) {
