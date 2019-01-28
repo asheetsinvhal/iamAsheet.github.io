@@ -2,7 +2,7 @@
  * Trading portal for Round 1
  */
 
-var shares_data = [
+/*var shares_data = [
     ["AUSTRALIA", "ANZ Group", "ANZ Group", 531.5024121295662, 1509],
     ["JAPAN", "Aerozone", "Aerozone", 2615.0, 2280],
     ["CHINA", "Alibaba", "Alibaba", 1609.8985679747072, 1910],
@@ -38,7 +38,7 @@ var shares_data = [
     ["ENGLAND", "Vodafone", "Vodafone", 1672.5799973146472, 1735],
     ["GERMANY", "Volkswagen", "Volkswagen AG", 1848.8986578554513, 2310],
     ["CHINA", "Xiomi", "Xiomi", 1410.0, 2050]
-];
+];*/
 var country_data = {
     "AUSTRALIA": ["ANZ", "BHP", "KAS", "KRMB", "TELS"],
     "ENGLAND": ["BCL", "BAR", "DAG", "TSCO", "VODA"],
@@ -48,7 +48,9 @@ var country_data = {
     "GERMANY": ["TKA", "DBK", "SIEM", "CON", "BMW"],
     "JAPAN": ["NPS", "KMC", "SMC", "SOFT", "SONY"]
 };
-
+var round = 1;
+var apiCall_List= [];
+var	apiWrite_Sheet = "";
 var country;
 var stocks;
 var portfolio_data;
@@ -60,13 +62,6 @@ var max_stk_qty = 0;
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '288596195086-4kckr5a3iaus4qeo28t4qleoegq0bffd.apps.googleusercontent.com'; // TODO: Update placeholder with desired client ID.
-
-    // TODO: Authorize using one of the following scopes:
-    //   'https://www.googleapis.com/auth/drive'
-    //   'https://www.googleapis.com/auth/drive.file'
-    //   'https://www.googleapis.com/auth/drive.readonly'
-    //   'https://www.googleapis.com/auth/spreadsheets'
-    //   'https://www.googleapis.com/auth/spreadsheets.readonly'
     var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 
     gapi.client.init({
@@ -102,13 +97,36 @@ function handleSignOutClick(event) {
     gapi.auth2.getAuthInstance()
         .signOut();
 }
-
+ 
+switch(parseInt(round)){
+	case 1:
+		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
+		apiWrite_Sheet = 'TestUIn1!A2';
+	  break;
+  case 2:
+		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR2', 'TeamScoresR2'];
+		apiWrite_Sheet = 'TestUIn2!A2';
+	  break;
+  case 3:
+		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR3', 'TeamScoresR3'];
+		apiWrite_Sheet = 'TestUIn3!A2';
+	  break;
+  case 4:
+		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR4', 'TeamScoresR4'];
+		apiWrite_Sheet = 'TestUIn4!A2';
+	  break;
+  default;
+		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
+		apiWrite_Sheet = 'TestUIn1!A2';
+	  break;
+}
+		
 function makeApiCall() { //Google sheets api
     var params = {
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        ranges: ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'],
+        ranges: apiCall_List,
         //ranges: ['Stock_Names','Stock_Prices','PortfolioR2','TeamScoresR2'],  // For ROund2
         //ranges: ['Stock_Names','Stock_Prices','PortfolioR3','TeamScoresR3'],  // For ROund3    
 
@@ -205,7 +223,7 @@ function updateMarketPrice() { //Google sheets api
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        ranges: 'Stock_Prices', // TODO: Update placeholder value.
+        ranges: ['Stock_Prices'], // TODO: Update placeholder value.
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -281,7 +299,7 @@ stock_action = async function(buttonId) {
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '11hJrOFXSRW0a7Nmfbi9yfQUfl6-kmTscyYOc-29w8gQ',
         // The A1 notation of the values to retrieve.
-        range: 'TestUIn1!A2', // CHANGE EVERY ROUND
+        range: apiWrite_Sheet, // CHANGE EVERY ROUND
 			  // range: 'TestUIn2!A2'
 			  //  range: 'TestUIn3!A2'
         // How the input data should be interpreted.
