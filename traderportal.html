@@ -8,7 +8,7 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<!--Trader 1 -->
- <script type="text/javascript" src="traderportal1.js"></script>
+ <script type="text/javascript" src="js/traderportal1.js"></script>
 	
  <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
@@ -18,15 +18,15 @@
 <body onload="handleSignInClick()">
 	<p class="big-title">TRADER'S PORTAL</p>
 	<div id='country-select-holder' style="display: inline-block;">
-  	<label style="margin-left:25px;">ROUND:
-			 <select id="round" name="round" onchange="setSheets();">
-						<option value=-1>-</option>
-						<option style="font-size:20px;">1</option>   
-						<option style="font-size:20px;">2</option>
-						<option style="font-size:20px;">3</option>
-				 		<option style="font-size:20px;">4</option>
-        </select>
-    </label>
+			<label style="margin-left:25px;">ROUND:
+				 <select id="round" name="round" onchange="setSheets();">
+							<option value=-1>-</option>
+							<option style="font-size:20px;">1</option>   
+							<option style="font-size:20px;">2</option>
+							<option style="font-size:20px;">3</option>
+							<option style="font-size:20px;">4</option>
+					</select>
+			</label>
 	</div>
 	<div id="container">
 		<p class="less-margin">TEAM ID</p>
