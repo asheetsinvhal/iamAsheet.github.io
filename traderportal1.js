@@ -1,5 +1,5 @@
 /**
- * Trading portal for Round 1
+ * Trading portal for trader 1
  */
 
 /*var shares_data = [
@@ -48,7 +48,7 @@ var country_data = {
     "GERMANY": ["TKA", "DBK", "SIEM", "CON", "BMW"],
     "JAPAN": ["NPS", "KMC", "SMC", "SOFT", "SONY"]
 };
-var round = 1;
+var round = 2;
 var apiCall_List= [];
 var	apiWrite_Sheet = "";
 var country;
