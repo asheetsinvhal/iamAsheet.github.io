@@ -182,13 +182,13 @@ putCountryData = function() { //change to putTeamData
     if (team_id != -1 && country_name != -1) {
         getPortfolio();
     }
-}
+};
 
 getPortfolio = function() {
     main_p = document.getElementById('main_p');
     main_p.innerHTML = '';
     main_p.innerHTML += '<div style="display: table">';
-    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid blue;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid blue;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid blue;"> VALUE </div></div> '
+    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;color: darkmagenta;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;color: darkmagenta;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;color: darkmagenta;"> VALUE </div></div> '
     var stock_count = 0;
     for (var k = 1; k < portfolio_data.length; k += 1) {
         if (portfolio_data[k][0] == parseInt(team_id)) {
@@ -196,12 +196,12 @@ getPortfolio = function() {
             main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
             stock_count += 1;
         }
-        if (stock_count == 5)
+        if ((round =1 && stock_count == 5) || (stock_count == 10))
             break;
     }
     main_p.innerHTML += '</div>';
     showPort();
-}
+};
 
 function showPort() {
     document.getElementById('portfolio-popup')
@@ -335,7 +335,7 @@ stock_action = async function(buttonId) {
     await request.then(async function(response) {
             if (response.status == 200) {
                 showNotif(buttonId + ' ORDER SUCCESFUL');
-								await makeApiCall()
+								await makeApiCall();
 							  await putCountryData();
 							  //await showPort();
             } else {
@@ -354,7 +354,7 @@ stock_action = async function(buttonId) {
 	
 }
 
-function showNotif(text, background = "white", color = "black") {
+function showNotif(text, background = "white", color = "red") {
     if (document.getElementById('notif').style.display == 'block') {
         setTimeout(function() {
             showNotif(text, background)
