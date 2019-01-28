@@ -146,7 +146,7 @@ loadStockTable2 = function() {
 
 }
 
-	function resetTable(tableData) {
+/*OLD function resetTable(tableData) {
 		if( tableData.rows){
 			 var rowCount = tableData.rows.length;
 			 for (var i = 0; i < rowCount; i+=1) {
@@ -155,7 +155,17 @@ loadStockTable2 = function() {
 		}else{
 			 return;		
 		}
-	}
+	}*/
+  function resetTable(tableData) {
+      if( tableData.rows && tableData.rows.length > 0){
+         var rowCount = tableData.rows.length;
+         for (var i = rowCount-1; i > -1; i-=1) {
+            tableData.deleteRow(i);
+         }
+      }else{
+         return;		
+      }
+	  }
 
 	async function updatePriceData1() {
 		  var stk_table = document.getElementById('stockTable1');
