@@ -65,15 +65,19 @@ function makeApiCall() { //Google sheets api
     };
 
     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
-    request.then(function(response) {
-	  // console.log( response.result);
-        if (response.status == 200) {
-            var all_data = response.result;
-            stocks_data = all_data.valueRanges[0].values;
-        }
-    }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-    });
+  	return new Promise((resolve, reject) => {  
+			request.then(function(response) {
+				// console.log( response.result);
+						if (response.status == 200) {
+								var all_data = response.result;
+								stocks_data = all_data.valueRanges[0].values;
+						}
+						resolve();
+				}, function(reason) {
+						console.error('error: ' + reason.result.error.message);
+						reject();
+				});
+			});
 }
 
 loadStockTable1 = function() {
@@ -153,14 +157,14 @@ loadStockTable2 = function() {
 		}
 	}
 
-	function updatePriceData1() {
+	async function updatePriceData1() {
 		  var stk_table = document.getElementById('stockTable1');
 			for (var r = 1, n = stk_table.rows.length; r < n; r+=1) {
 						var old_cmp = Math.round(parseFloat(stk_table.rows[r].cells[2].innerHTML) * 100)/100;
 						old_cmp_list1.push(old_cmp);
 			}
 			
-		  makeApiCall();
+		  await makeApiCall();
 		  for(var j = 1; j < stocks_data.length; j += 1){
 				 if(stocks_data[j][10] == country_name1){
 					    var new_cmp= Math.round(parseFloat(stocks_data[j][6]) * 100)/100;
