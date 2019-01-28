@@ -21,6 +21,17 @@
 </head>
 <body onload="handleSignInClick()">
 	<p class="big-title">TRADER'S PORTAL</p>
+	<div id='country-select-holder' style="display: inline-block;">
+  	<label style="margin-left:20px;">ROUND:
+			 <select id="round" name="round" onchange="setSheets();">
+						<option value=-1>-</option>
+						<option>1</option>   
+						<option>2</option>
+						<option>3</option>
+				 		<option>4</option>
+        </select>
+    </label>
+	</div>
 	<div id="container">
 		<p class="less-margin">TEAM ID</p>
 		<div>
