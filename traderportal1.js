@@ -188,7 +188,7 @@ getPortfolio = function() {
     main_p = document.getElementById('main_p');
     main_p.innerHTML = '';
     main_p.innerHTML += '<div style="display: table">';
-    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;color: darkmagenta;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;color: darkmagenta;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;color: darkmagenta;"> VALUE </div></div> '
+    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;color: #0ba216;"> VALUE </div></div> '
     var stock_count = 0;
     for (var k = 1; k < portfolio_data.length; k += 1) {
         if (portfolio_data[k][0] == parseInt(team_id)) {
@@ -196,7 +196,7 @@ getPortfolio = function() {
             main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
             stock_count += 1;
         }
-        if ((round =1 && stock_count == 5) || (stock_count == 10))
+        if ((round ==1 && stock_count == 5) || (stock_count == 10))
             break;
     }
     main_p.innerHTML += '</div>';
