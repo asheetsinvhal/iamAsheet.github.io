@@ -48,7 +48,6 @@ var country_data = {
     "GERMANY": ["TKA", "DBK", "SIEM", "CON", "BMW"],
     "JAPAN": ["NPS", "KMC", "SMC", "SOFT", "SONY"]
 };
-var round = 2;
 var apiCall_List= [];
 var	apiWrite_Sheet = "";
 var country;
@@ -99,7 +98,8 @@ function handleSignOutClick(event) {
 }
 
 //new addition
-function setSheets(){ 
+function setSheets(){
+	  var round = document.getElementById('round').value;
 		switch(parseInt(round)){
 			case 1:
 				apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
