@@ -188,10 +188,10 @@ getPortfolio = function() {
     main_p = document.getElementById('main_p');
     main_p.innerHTML = '';
     main_p.innerHTML += '<div style="display: table">';
-    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid black;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid black;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid black;"> VALUE </div></div> '
+    main_p.innerHTML += '<div style="display: table-row"><div style="display: table-cell;padding: 4px;border: 1px solid blue;">StockID</div><div style="display: table-cell;padding: 4px;border: 1px solid blue;"> QTY </div> <div style="display: table-cell;padding: 4px;border: 1px solid blue;"> VALUE </div></div> '
     var stock_count = 0;
     for (var k = 1; k < portfolio_data.length; k += 1) {
-        if (portfolio_data[k][0] == team_id) {
+        if (portfolio_data[k][0] == parseInt(team_id)) {
             var current_value = Math.round(parseFloat(portfolio_data[k][4]) * 100) / 100;
             main_p.innerHTML += '<div style="display: table-row">' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][1] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + portfolio_data[k][2] + '</div>' + '<div style="display: table-cell;padding: 4px;border: 1px solid black;">' + current_value + '</div>' + '</div>';
             stock_count += 1;
