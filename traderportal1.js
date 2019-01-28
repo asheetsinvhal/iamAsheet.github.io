@@ -84,7 +84,7 @@ function handleClientLoad() {
 
 function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
-        makeApiCall();
+        setSheets();
     }
 }
 
@@ -97,28 +97,36 @@ function handleSignOutClick(event) {
     gapi.auth2.getAuthInstance()
         .signOut();
 }
- 
-switch(parseInt(round)){
-	case 1:
-		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
-		apiWrite_Sheet = 'TestUIn1!A2';
-	  break;
-  case 2:
-		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR2', 'TeamScoresR2'];
-		apiWrite_Sheet = 'TestUIn2!A2';
-	  break;
-  case 3:
-		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR3', 'TeamScoresR3'];
-		apiWrite_Sheet = 'TestUIn3!A2';
-	  break;
-  case 4:
-		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR4', 'TeamScoresR4'];
-		apiWrite_Sheet = 'TestUIn4!A2';
-	  break;
-  default;
-		apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
-		apiWrite_Sheet = 'TestUIn1!A2';
-	  break;
+
+//new addition
+function setSheets(){ 
+		switch(parseInt(round)){
+			case 1:
+				apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
+				apiWrite_Sheet = 'TestUIn1!A2';
+				makeApiCall();
+				break;
+			case 2:
+				apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR2', 'TeamScoresR2'];
+				apiWrite_Sheet = 'TestUIn2!A2';
+				makeApiCall();
+				break;
+			case 3:
+				apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR3', 'TeamScoresR3'];
+				apiWrite_Sheet = 'TestUIn3!A2';
+				makeApiCall();
+				break;
+			case 4:
+				apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR4', 'TeamScoresR4'];
+				apiWrite_Sheet = 'TestUIn4!A2';
+				makeApiCall();
+				break;
+			default:
+				apiCall_List= ['Stock_Names', 'Stock_Prices', 'PortfolioR1', 'TeamScoresR1'];
+				apiWrite_Sheet = 'TestUIn1!A2';
+				makeApiCall();
+				break;
+		}
 }
 		
 function makeApiCall() { //Google sheets api
