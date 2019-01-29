@@ -267,7 +267,7 @@ stock_action = async function(buttonId) {
 			showNotif('INCORRECT ORDER AMOUNT !');
 			return;
     }
-		if( trx_value > cash_balance){
+		if( (trx_value > cash_balance) && buttonId == "BUY" ){
 				showNotif('INSUFFICIENT CASH BALANCE !');
         return;
 		}
