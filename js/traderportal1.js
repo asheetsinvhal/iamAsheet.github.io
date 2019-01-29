@@ -263,7 +263,7 @@ stock_action = async function(buttonId) {
         showNotif('	DATA MISSING !');
         return;
     }
-    if((buttonId == "BUY" && (price > stk_price)) || (buttonId == "SELL" && (price < stk_price)) ){
+    if((buttonId == "BUY" && (price < stk_price)) || (buttonId == "SELL" && (price > stk_price)) ){
 			showNotif('INCORRECT ORDER AMOUNT !');
 			return;
     }
