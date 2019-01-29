@@ -57,6 +57,7 @@ var team_data;
 var upper_ckt;
 var lower_ckt;
 var max_stk_qty = 0;
+var cash_balance;
 
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
@@ -171,8 +172,9 @@ putCountryData = function() { //change to putTeamData
     team_id = document.getElementById('team_id').value;
     country_name = document.getElementById('country_name').value;
     // Team name  & Balance 
+		cash_balance = Math.round(team_data[team_id][8] * 100) / 100;
     document.getElementById('team_name').innerHTML = team_data[team_id][1];
-    document.getElementById('team_balance').innerHTML = Math.round(team_data[team_id][8] * 100) / 100;
+    document.getElementById('team_balance').innerHTML = cash_balance;
     main_content = document.getElementById('main');
     main_content.innerHTML = '<option>-</option>';
     for (var i in country_data[country_name]) {
@@ -289,15 +291,20 @@ stock_action = async function(buttonId) {
     var teamId = document.getElementById('team_id').value;
     var country = document.getElementById('country_name').value;
     var stockId = document.getElementById('main').value; //main-> stock ID
-    var qty = document.getElementById('quantity').value;
-    var price = document.getElementById('price').value;
+    var qty = parseInt(document.getElementById('quantity').value);
+    var price = Math.round(parseFloat(document.getElementById('price').value) * 100) / 100;
+	  var trx_value = qty * price;
     if (teamId == "-1" || country == "-1" || stockId == "" || qty == "" || price == "") {
-        showNotif('	DATA MISSING!');
+        showNotif('	DATA MISSING !');
         return;
     }
     /*if((buttonId == "BUY" && parseFloat(price) < stk_price) || (buttonId == "SELL" && parseFloat(price) < stk_price)){
 			 return;
 		}*/
+	  if( trx_value > cash_balance){
+				showNotif('INSUFFICIENT CASH BALANCE !');
+        return;
+		}
     if (parseFloat(price) > upper_ckt || parseFloat(price) < lower_ckt) {
         showNotif('PRICE EXCEEDS ±20% !');
         return;
