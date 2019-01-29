@@ -85,8 +85,8 @@ h2 a {
 	  background-color: #ffffaa;
 }
 
-.container1 td:first-child { color: #FB667A; }
-.container2 td:first-child { color: #FB667A; }
+.container1 td:first-child { color: #d9e521; }
+.container2 td:first-child { color: #d9e521; }
 @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
