@@ -101,9 +101,9 @@ function getTeamData() { //Google sheets api
         cell2 = row.insertCell(1);
         cell2.innerHTML = teams_table_list[k][1];
         cell3 = row.insertCell(2);
-        //cell4 = row.insertCell(3);
-        cell3.innerHTML = teams_table_list[k][2];
-        //cell4.innerHTML = 0.00;
+				cell3.innerHTML = teams_table_list[k][8];
+        cell4 = row.insertCell(3);
+        cell4.innerHTML = teams_table_list[k][2];
         row_count += 1;
         if( row_count == 13){
           break;
