@@ -259,7 +259,7 @@ stock_action = async function(buttonId) {
     var qty = parseInt(document.getElementById('quantity').value);
     var price = Math.round(parseFloat(document.getElementById('price').value) * 100) / 100;
 	  var trx_value = qty * price;
-    if (teamId == "-1" || country == "-1" || stockId == "" || qty == NaN || price == NaN) {
+    if (teamId == "-1" || country == "-1" || stockId == "-" || isNaN(qty) || isNaN(price) ) {
         showNotif('	DATA MISSING !');
         return;
     }
