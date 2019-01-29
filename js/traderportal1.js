@@ -13,7 +13,7 @@ var country_data = {
     "JAPAN": ["NPS", "KMC", "SMC", "SOFT", "SONY"]
 };
 var apiCall_List= [];
-var	apiWrite_Sheet = "";
+var apiWrite_Sheet = "";
 var country;
 var stocks;
 var portfolio_data;
@@ -22,6 +22,7 @@ var upper_ckt;
 var lower_ckt;
 var max_stk_qty = 0;
 var cash_balance;
+var stk_price = 0;
 
 function initClient() {
     var API_KEY = 'AIzaSyCr8id8gmmgCSr28P3PxWNiKvga6im2P1s'; // TODO: Update placeholder with desired API key.
@@ -212,7 +213,7 @@ function updateMarketPrice() { //Google sheets api
 
     var request = gapi.client.sheets.spreadsheets.values.batchGet(params); // to read data
     request.then(function(response) {
-        var stk_price = 0;
+        
         var stockId = document.getElementById('main')
             .value;
         if (response.status == 200 && response.result.valueRanges[0] != null) {
